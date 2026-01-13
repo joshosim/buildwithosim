@@ -1,8 +1,7 @@
 
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, Clock, LightbulbIcon, Quote, QuoteIcon, TextQuote } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
 
 interface Post {
   id: string;
@@ -12,6 +11,9 @@ interface Post {
   content: string;
   excerpt?: string;
   cover_image?: string;
+  images?: string[]; // additional images array
+  specific_info?: string; // key points/tips section
+  conclusion_content?: string; // conclusion section
   published_date: string;
   created_at: string;
   post_categories?: {
@@ -58,7 +60,7 @@ function calculateReadTime(content: string): string {
 function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   });
 }
@@ -77,20 +79,26 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
 
   return (
     <div>
-      <div className="bg-gray-50 py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <span className="inline-block mb-6 px-4 py-2 bg-[#fdbe21] text-white font-semibold rounded-full">
-            {category}
-          </span>
+      <div className="bg-gray-50 py-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-center mt-12 mb-6">
+            <span className="text-sm">Published {formattedDate}</span>
+          </div>
 
-          <h1 className="text-3xl md:text-5xl font-bold mb-6">
+          <h1 className="text-3xl flex items-center justify-center md:text-5xl font-bold mb-6">
             {post.title}
           </h1>
+
+          <div className="flex justify-center items-center mb-6 text-base md:text-lg leading-relaxed whitespace-pre-line">
+            {post.subtitle}
+          </div>
+
+          <div className="flex justify-center items-center">
+            <span className="inline-block mb-6 px-4 py-2 bg-[#fdbe21] text-white font-semibold rounded-full">
+              {category}
+            </span>
+          </div>
           <div className="flex gap-6 mb-8 text-gray-600">
-            <div className="flex items-center gap-2">
-              <Calendar size={18} />
-              <span className="text-sm">{formattedDate}</span>
-            </div>
             <div className="flex items-center gap-2">
               <Clock size={18} />
               <span className="text-sm">{readTime}</span>
@@ -103,10 +111,65 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
               className="w-full h-96 object-cover"
             />
           </div>
-          <div className="bg-white p-6 md:p-10 rounded-xl shadow-lg">
-            <div className="text-base md:text-lg leading-relaxed whitespace-pre-line">
-              {post.content}
+          <div className='max-w-3xl mx-auto'>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold mb-6">
+                Introduction
+              </h1>
+              <div className="text-base md:text-lg leading-relaxed whitespace-pre-line">
+                {post.content}
+              </div>
             </div>
+
+            {/* Specific Info Section */}
+            {post.specific_info && (
+              <div className="mt-8  p-6 md:p-10 border-l-4 border-[#fdbe21]">
+                <div className="">
+                  <QuoteIcon className="inline-block mb-2 text-black mr-2" />
+                  <span className='text-base font-bold md:text-2xl leading-relaxed whitespace-pre-line'>{post.specific_info}</span>
+                  <Quote className="inline-block mb-2 text-black ml-2" />
+                </div>
+
+                <div className='flex items-center gap-4 mt-4'>
+                  <div className='h-12 w-12 rounded-full bg-amber-400' />
+                  <div>
+                    <h2 className="text-base font-bold">Osim Uka</h2>
+                    <h2 className="text-base italic">Software Engineer</h2>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Additional Images Gallery */}
+            {post.images && post.images.length > 0 && (
+              <div className="mt-8">
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">Gallery</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {post.images.map((image, index) => (
+                    <div key={index} className="rounded-xl overflow-hidden shadow-lg">
+                      <img
+                        src={image}
+                        alt={`Gallery image ${index + 1}`}
+                        className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Conclusion Section */}
+            {post.conclusion_content && (
+              <div className="mt-8 bg-green-50 p-6 md:p-10 rounded-xl border-l-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <LightbulbIcon />
+                  <h2 className='text-2xl font-bold text-gray-900'>Conclusion</h2>
+                </div>
+                <div className="text-base md:text-lg leading-relaxed whitespace-pre-line text-gray-700">
+                  {post.conclusion_content}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
