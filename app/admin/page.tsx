@@ -154,8 +154,8 @@ export default function AdminPage() {
             Admin Dashboard
           </h1>
           <p className="text-slate-400">Create and manage blog posts</p>
-          <Link 
-            href="/blog" 
+          <Link
+            href="/blog"
             className="inline-block mt-4 text-[#fdbe21] hover:text-[#e5ab1e] font-semibold"
           >
             ← View Blog
@@ -180,11 +180,10 @@ export default function AdminPage() {
                   </div>
                   <div className="flex gap-2">
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        post.published
+                      className={`px-3 py-1 rounded-full text-xs font-semibold ${post.published
                           ? 'bg-green-900 text-green-200'
                           : 'bg-yellow-900 text-yellow-200'
-                      }`}
+                        }`}
                     >
                       {post.published ? '✓ Published' : 'Draft'}
                     </span>
