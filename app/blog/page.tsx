@@ -48,14 +48,14 @@ export default async function Blog() {
   const posts = await getPosts();
 
   return (
-    <div>
+    <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#fdbe21]">
             Blog & Resources
           </h2>
-          <p className="text-gray-600 text-base md:text-xl max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 text-base md:text-xl max-w-2xl mx-auto">
             Insights on personal development, finance, tech, and creative living
           </p>
         </div>
@@ -63,7 +63,7 @@ export default async function Blog() {
         {/* Posts Grid or Empty State */}
         {posts.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg mb-4">
+            <p className="text-gray-600 dark:text-gray-300 text-lg mb-4">
               No posts yet. Check back soon!
             </p>
             <Link

@@ -42,7 +42,7 @@ export default function BlogCard({ post }: { post: Post }) {
     <Link
       key={post.id}
       href={`/blog/${post.slug}`}
-      className="h-full flex flex-col bg-white rounded-lg shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 overflow-hidden"
+      className="h-full flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 overflow-hidden"
     >
       <img
         src={
@@ -57,11 +57,11 @@ export default function BlogCard({ post }: { post: Post }) {
           {category}
         </span>
 
-        <h3 className="text-xl font-bold mb-3 text-gray-900 flex-grow">
+        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white flex-grow">
           {post.title}
         </h3>
 
-        <div className="flex items-center gap-4 text-gray-500 text-sm mt-auto pt-4 border-t border-gray-200">
+        <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400 text-sm mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-1">
             <Calendar size={16} />
             <span>{formattedDate}</span>

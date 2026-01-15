@@ -67,62 +67,62 @@ export default function Contact() {
     mutation.mutate(data);
   };
   return (
-    <div>
+    <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="mt-16 mb-20 grid grid-cols-1 md:grid-cols-[25%_73%] gap-6">
         <Side />
         <div className="mx-0 md:mx-0 px-4 md:px-0">
-          <h1 className="font-normal text-3xl md:text-7xl text-left mb-4">
+          <h1 className="font-normal text-3xl md:text-7xl text-left mb-4 text-gray-900 dark:text-white">
             Follow Me
           </h1>
           <div className="flex items-center gap-4 justify-start my-4 flex-wrap">
             <button
-              className="text-base md:text-xl rounded-full border border-gray-300 text-black font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              className="text-base md:text-xl rounded-full border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               onClick={() => window.open("https://www.facebook.com/uka.osim.56", "_blank")}
             >
-              <Facebook size={30} className="text-black" />
+              <Facebook size={30} className="text-gray-900 dark:text-gray-100" />
               Facebook
             </button>
             <button
-              className="text-base md:text-xl rounded-full border border-gray-300 text-black font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              className="text-base md:text-xl rounded-full border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               onClick={() => window.open("https://www.linkedin.com/in/uka-osim-9761601a0/", "_blank")}
             >
-              <Linkedin size={30} className="text-black" />
+              <Linkedin size={30} className="text-gray-900 dark:text-gray-100" />
               LinkedIn
             </button>
             <button
-              className="text-base md:text-xl rounded-full border border-gray-300 text-black font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              className="text-base md:text-xl rounded-full border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               onClick={() => window.open("https://www.instagram.com/ukaosim/", "_blank")}
             >
-              <Instagram size={30} className="text-black" />
+              <Instagram size={30} className="text-gray-900 dark:text-gray-100" />
               Instagram
             </button>
             <button
-              className="text-base md:text-xl rounded-full border border-gray-300 text-black font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              className="text-base md:text-xl rounded-full border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               onClick={() => window.open("https://x.com/teamjojo_code", "_blank")}
             >
-              <Twitter size={30} className="text-black" />
+              <Twitter size={30} className="text-gray-900 dark:text-gray-100" />
               X (Twitter)
             </button>
             <button
-              className="text-base md:text-xl rounded-full border border-gray-300 text-black font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              className="text-base md:text-xl rounded-full border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               onClick={() => window.open("https://github.com/joshosim", "_blank")}
             >
-              <Github size={30} className="text-black" />
+              <Github size={30} className="text-gray-900 dark:text-gray-100" />
               Github
             </button>
             <button
-              className="text-base md:text-xl rounded-full border border-gray-300 text-black font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              className="text-base md:text-xl rounded-full border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-light px-4 py-2 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               onClick={handleClick}
             >
-              <MessageCircle size={30} className="text-black" />
+              <MessageCircle size={30} className="text-gray-900 dark:text-gray-100" />
               Whatsapp
             </button>
           </div>
-          <h2 className="font-normal text-3xl md:text-4xl text-left mb-4">
+          <h2 className="font-normal text-3xl md:text-4xl text-left mb-4 text-gray-900 dark:text-white">
             Reach out to me.
           </h2>
           <form
-            className="bg-white rounded-xl p-2"
+            className="bg-white dark:bg-gray-800 rounded-xl p-2"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -135,7 +135,7 @@ export default function Contact() {
                     <input
                       {...field}
                       placeholder="Name"
-                      className="w-full bg-gray-100 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21]"
+                      className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21]"
                     />
                     {errors.name && (
                       <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
@@ -152,7 +152,7 @@ export default function Contact() {
                     <input
                       {...field}
                       placeholder="Email"
-                      className="w-full bg-gray-100 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21]"
+                      className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21]"
                     />
                     {errors.email && (
                       <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
@@ -171,7 +171,7 @@ export default function Contact() {
                     {...field}
                     rows={5}
                     placeholder="Message"
-                    className="w-full bg-gray-100 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21] resize-none"
+                    className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21] resize-none"
                   />
                   {errors.message && (
                     <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
@@ -181,7 +181,7 @@ export default function Contact() {
             />
             <button
               type="submit"
-              className="w-full bg-black text-white rounded-md py-3 text-sm font-normal hover:bg-gray-800 transition-colors"
+              className="w-full bg-black dark:bg-gray-900 text-white rounded-md py-3 text-sm font-normal hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
             >
               Send a Message
             </button>

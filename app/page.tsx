@@ -69,15 +69,15 @@ export default function Home() {
                 👋 Welcome to my portfolio
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight text-gray-900 dark:text-white">
                 Hi, I'm <span className="text-[#fdbe21]">Osim Uka</span>
               </h1>
 
-              <h2 className="text-xl md:text-2xl text-gray-600 font-normal">
+              <h2 className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-normal">
                 Software Developer • Creative Designer • Digital Creator
               </h2>
 
-              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+              <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 I build modern web & mobile applications, create digital products, and share insights on personal development and finance.
               </p>
 
@@ -118,11 +118,11 @@ export default function Home() {
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 text-center shadow-lg">
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-lg">
                 <h3 className="text-3xl font-bold text-[#fdbe21] mb-2">
                   {stat.value}
                 </h3>
-                <p className="text-gray-600 font-medium">
+                <p className="text-gray-600 dark:text-gray-300 font-medium">
                   {stat.label}
                 </p>
               </div>
@@ -132,13 +132,13 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
               What I Do
             </h2>
-            <p className="text-base md:text-lg text-gray-600">
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-300">
               Specialized services to bring your ideas to life
             </p>
           </div>
@@ -147,17 +147,17 @@ export default function Home() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg text-center cursor-pointer hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className="bg-white dark:bg-gray-800 p-6 rounded-lg text-center cursor-pointer hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
               >
                 <div className="w-20 h-20 bg-[#fdbe21]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                   <service.icon size={40} className={service.color} />
                 </div>
 
-                <h3 className="text-lg font-semibold mb-4">
+                <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
                   {service.title}
                 </h3>
 
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   {service.desc}
                 </p>
               </div>
@@ -167,13 +167,13 @@ export default function Home() {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
               Featured Projects
             </h2>
-            <p className="text-base md:text-lg text-gray-600">
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-300">
               Some of my recent work
             </p>
           </div>
@@ -182,7 +182,7 @@ export default function Home() {
             {data.slice(0, 3).map((project, index) => (
               <div
                 key={project.id}
-                className="bg-white rounded-lg overflow-hidden shadow-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 <div className="h-48 overflow-hidden">
                   <Image
@@ -204,11 +204,11 @@ export default function Home() {
                     </span>
                   )}
 
-                  <h3 className="text-lg font-bold mb-2">
+                  <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
                     {project.title}
                   </h3>
 
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
                     {project.desc}
                   </p>
 

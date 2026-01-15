@@ -136,17 +136,17 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
 
   return (
     <div>
-      <div className="bg-gray-50 py-4">
+      <div className="bg-gray-50 dark:bg-gray-900 py-4">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-center mt-12 mb-6">
-            <span className="text-sm">Published {formattedDate}</span>
+            <span className="text-sm text-gray-600 dark:text-gray-300">Published {formattedDate}</span>
           </div>
 
-          <h1 className="text-3xl flex items-center justify-center md:text-5xl font-bold mb-6">
+          <h1 className="text-3xl flex items-center justify-center md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
             {post.title}
           </h1>
 
-          <div className="flex justify-center items-center mb-6 text-base md:text-lg leading-relaxed whitespace-pre-line">
+          <div className="flex justify-center items-center mb-6 text-base md:text-lg leading-relaxed whitespace-pre-line text-gray-700 dark:text-gray-300">
             {post.subtitle}
           </div>
 
@@ -155,7 +155,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
               {category}
             </span>
           </div>
-          <div className="flex gap-6 mb-8 text-gray-600">
+          <div className="flex gap-6 mb-8 text-gray-600 dark:text-gray-400">
             <div className="flex items-center gap-2">
               <Clock size={18} />
               <span className="text-sm">{readTime}</span>
@@ -170,29 +170,27 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
           </div>
           <div className='max-w-3xl mx-auto'>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold mb-6">
+              <h1 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
                 Introduction
               </h1>
 
-              <div className="prose lg:prose-xl max-w-none mb-8">
+              <div className="prose lg:prose-xl max-w-none mb-8 dark:prose-invert">
                 <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             </div>
 
             {/* Specific Info Section */}
             {post.specific_info && (
-              <div className="mt-8  p-6 md:p-10 border-l-4 border-[#fdbe21]">
-                <ReactMarkdown>
-                  {/* <span className='text-base font-bold md:text-2xl leading-relaxed whitespace-pre-line'> */}
+              <div className="mt-8 p-6 md:p-10 border-l-4 border-[#fdbe21] bg-gray-50 dark:bg-gray-800">
+                <div className="prose dark:prose-invert">
                   {post.specific_info}
-                  {/* </span> */}
-                </ReactMarkdown>
+                </div>
 
                 <div className='flex items-center gap-4 mt-4'>
                   <div className='h-12 w-12 rounded-full bg-amber-400' />
                   <div>
-                    <h2 className="text-base font-bold">Osim Uka</h2>
-                    <h2 className="text-base italic">Software Engineer</h2>
+                    <h2 className="text-base font-bold text-gray-900 dark:text-white">Osim Uka</h2>
+                    <h2 className="text-base italic text-gray-600 dark:text-gray-300">Software Engineer</h2>
                   </div>
                 </div>
               </div>
@@ -201,7 +199,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
             {/* Additional Images Gallery */}
             {post.images && post.images.length > 0 && (
               <div className="mt-8">
-                <h2 className="text-2xl font-bold mb-6 text-gray-900">Gallery</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Gallery</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {post.images.map((image, index) => (
                     <div key={index} className="rounded-xl overflow-hidden shadow-lg">
@@ -218,12 +216,12 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
 
             {/* Conclusion Section */}
             {post.conclusion_content && (
-              <div className="mt-8 bg-green-50 p-6 md:p-10 rounded-xl border-l-4">
+              <div className="mt-8 bg-green-50 dark:bg-green-900/20 p-6 md:p-10 rounded-xl border-l-4 border-green-500">
                 <div className="flex items-center gap-2 mb-4">
-                  <LightbulbIcon />
-                  <h2 className='text-2xl font-bold text-gray-900'>Conclusion</h2>
+                  <LightbulbIcon className="text-green-600 dark:text-green-400" />
+                  <h2 className='text-2xl font-bold text-gray-900 dark:text-white'>Conclusion</h2>
                 </div>
-                <div className="text-base md:text-lg leading-relaxed whitespace-pre-line text-gray-700">
+                <div className="text-base md:text-lg leading-relaxed whitespace-pre-line text-gray-700 dark:text-gray-300">
                   {post.conclusion_content}
                 </div>
               </div>

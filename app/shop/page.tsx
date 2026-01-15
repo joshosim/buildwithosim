@@ -41,29 +41,29 @@ const products = [
 
 export default function Shop() {
   return (
-    <div>
+    <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#fdbe21]">
             Digital Products
           </h2>
-          <p className="text-gray-600 text-base md:text-xl max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 text-base md:text-xl max-w-2xl mx-auto">
             Templates, guides, and resources to boost your productivity and creativity
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product) => (
-            <div key={product.id} className="flex flex-col h-full bg-white rounded-lg shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+            <div key={product.id} className="flex flex-col h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
               <img src={product.image} alt={product.title} className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-6 flex-grow flex flex-col">
                 <span className="inline-block mb-4 px-3 py-1 bg-[#fdbe21] text-white text-xs font-semibold rounded-full w-fit">
                   {product.category}
                 </span>
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
                   {product.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4 flex-grow">
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow">
                   {product.description}
                 </p>
                 <div className="flex justify-between items-center mt-auto">
@@ -80,11 +80,11 @@ export default function Shop() {
           ))}
         </div>
 
-        <div className="mt-16 p-12 bg-[#fdbe21]/10 rounded-2xl text-center border-2 border-dashed border-[#fdbe21]/30">
+        <div className="mt-16 p-12 bg-[#fdbe21]/10 dark:bg-[#fdbe21]/5 rounded-2xl text-center border-2 border-dashed border-[#fdbe21]/30">
           <h3 className="text-3xl font-bold mb-4 text-[#fdbe21]">
             More Products Coming Soon
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
             Website templates, coding guides, productivity tools, and more digital resources.
           </p>
           <button className="border-2 border-[#fdbe21] text-[#fdbe21] font-semibold px-8 py-2 rounded-lg hover:bg-[#fdbe21]/10 transition-colors">

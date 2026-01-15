@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, Search, DollarSign, Plus } from 'lucide-react'
+import { Menu, X, Search, DollarSign, Plus, Moon, Sun } from 'lucide-react'
 import AvatarImage from '../public/avatar.png'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
@@ -22,12 +24,12 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-white/80 backdrop-blur-xs border-b border-gray-100 sticky top-0 z-50 p-4">
+    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xs border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="flex items-center gap-3 border-r border-gray-200 pr-4 mr-4 md:border-r-2">
+          <div className="flex items-center gap-3 border-r border-gray-200 dark:border-gray-700 pr-4 mr-4 md:border-r-2">
             <button
-              className="md:hidden cursor-pointer"
+              className="md:hidden cursor-pointer text-gray-700 dark:text-gray-300"
               onClick={toggleMenu}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -48,33 +50,45 @@ export default function Header() {
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-gray-700 hover:text-[#fdbe21] font-medium transition-colors">
+            <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
               Home
             </Link>
-            <Link href="/projects" className="text-gray-700 hover:text-[#fdbe21] font-medium transition-colors">
+            <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
               Projects
             </Link>
-            <Link href="/blog" className="text-gray-700 hover:text-[#fdbe21] font-medium transition-colors">
+            <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
               Blog
             </Link>
-            <Link href="/shop" className="text-gray-700 hover:text-[#fdbe21] font-medium transition-colors">
+            <Link href="/shop" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
               Shop
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-[#fdbe21] font-medium transition-colors">
+            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
               About
             </Link>
           </nav>
         </div>
 
         <div className="flex items-center gap-3">
-          <Search className="hidden md:block text-gray-600" size={20} />
+          <Search className="hidden md:block text-gray-600 dark:text-gray-400" size={20} />
+
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? (
+              <Sun size={20} className="text-gray-600 dark:text-gray-400" />
+            ) : (
+              <Moon size={20} className="text-gray-600 dark:text-gray-400" />
+            )}
+          </button>
 
           <button
             onClick={sendMessage}
             className="flex items-center gap-2 cursor-pointer"
           >
-            <span className="hidden md:block text-gray-700">Support</span>
-            <DollarSign className="md:hidden text-gray-600" size={20} />
+            <span className="hidden md:block text-gray-700 dark:text-gray-300">Support</span>
+            <DollarSign className="md:hidden text-gray-600 dark:text-gray-400" size={20} />
           </button>
 
           <Link
@@ -89,46 +103,46 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-50 mt-4 rounded-lg">
+        <div className="md:hidden bg-gray-50 dark:bg-gray-800 mt-4 rounded-lg">
           <nav className="flex flex-col">
             <Link
               href="/"
-              className="py-3 px-4 border-b border-gray-200 hover:bg-gray-100 transition-colors"
+              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/projects"
-              className="py-3 px-4 border-b border-gray-200 hover:bg-gray-100 transition-colors"
+              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Projects
             </Link>
             <Link
               href="/blog"
-              className="py-3 px-4 border-b border-gray-200 hover:bg-gray-100 transition-colors"
+              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Blog
             </Link>
             <Link
               href="/shop"
-              className="py-3 px-4 border-b border-gray-200 hover:bg-gray-100 transition-colors"
+              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Shop
             </Link>
             <Link
               href="/about"
-              className="py-3 px-4 border-b border-gray-200 hover:bg-gray-100 transition-colors"
+              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               About
             </Link>
             <Link
               href="/contact"
-              className="py-3 px-4 hover:bg-gray-100 transition-colors"
+              className="py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Contact

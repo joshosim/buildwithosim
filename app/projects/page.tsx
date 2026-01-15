@@ -19,13 +19,13 @@ export default function Projects() {
   });
 
   return (
-    <div>
+    <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#fdbe21]">
             My Projects
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             Showcasing {data.length} projects across web, mobile, and digital solutions
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function Projects() {
             <input
               type="text"
               placeholder="Search Projects"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fdbe21] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fdbe21] focus:border-transparent"
               onChange={(e) => onSearch(e.target.value)}
             />
           </div>
@@ -47,22 +47,22 @@ export default function Projects() {
             <div
               key={project.id}
               onClick={() => window.open(project.link, '_blank')}
-              className="flex flex-col h-full cursor-pointer bg-white rounded-lg shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+              className="flex flex-col h-full cursor-pointer bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
             >
               <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-6 flex-grow flex flex-col">
                 {project.role && (
                   <span className={`inline-block mb-2 px-3 py-1 text-xs font-semibold rounded-full w-fit ${project.role.includes('Team')
-                    ? 'bg-blue-100 text-blue-800'
-                    : 'bg-gray-100 text-gray-800'
+                    ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                    : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
                     }`}>
                     {project.role}
                   </span>
                 )}
-                <h3 className="text-lg font-bold mb-2">
+                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow line-clamp-3">
                   {project.desc}
                 </p>
                 <div className="flex gap-2 flex-wrap mt-auto">
