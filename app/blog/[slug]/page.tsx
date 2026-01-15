@@ -174,7 +174,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                 Introduction
               </h1>
 
-              <div className="prose lg:prose-xl max-w-none mb-8 dark:prose-invert">
+              <div className="prose lg:prose-xl text-[12px] text-justify md:text-[15px] leading-loose max-w-none mb-8 dark:prose-invert">
                 <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             </div>
@@ -221,7 +221,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                   <LightbulbIcon className="text-green-600 dark:text-green-400" />
                   <h2 className='text-2xl font-bold text-gray-900 dark:text-white'>Conclusion</h2>
                 </div>
-                <div className="text-base md:text-lg leading-relaxed whitespace-pre-line text-gray-700 dark:text-gray-300">
+                <div className="leading-loose text-[12px] text-justify md:text-[15px] whitespace-pre-line text-gray-700 dark:text-gray-300">
                   {post.conclusion_content}
                 </div>
               </div>
