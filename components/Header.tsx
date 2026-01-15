@@ -17,7 +17,7 @@ export default function Header() {
 
   const sendMessage = () => {
     const phoneNumber = "+2347066530998"
-    const message = "Hello Osim Uka, I would like to get support from you. Please Send your Account Details."
+    const message = "Hello Osim Uka, I would like to support you. Please Send your Account Details."
     const urlEncodedMessage = encodeURIComponent(message)
     const finalUrl = "https://wa.me/" + phoneNumber + "?text=" + urlEncodedMessage
     window.open(finalUrl, '_blank')?.focus()
@@ -44,8 +44,8 @@ export default function Header() {
             />
 
             <Link href="/" className="cursor-pointer font-bold text-[#fdbe21]">
-              <span className="block md:hidden">OSIM</span>
-              <span className="hidden md:block">OSIM UKA</span>
+              <span className="block md:hidden">BWO</span>
+              <span className="hidden md:block">BUILDWITHOSIM</span>
             </Link>
           </div>
 
