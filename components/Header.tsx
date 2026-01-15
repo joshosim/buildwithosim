@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, Search, DollarSign, Plus, Moon, Sun } from 'lucide-react'
-import AvatarImage from '../public/avatar.png'
+import AvatarImage from '../public/logo.png'
 import { useTheme } from '@/contexts/ThemeContext'
 
 export default function Header() {
@@ -38,8 +38,8 @@ export default function Header() {
             <Image
               src={AvatarImage}
               alt="Osim Uka"
-              width={20}
-              height={20}
+              width={50}
+              height={50}
               className="rounded-full"
             />
 
