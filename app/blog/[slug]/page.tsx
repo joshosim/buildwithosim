@@ -2,6 +2,8 @@
 import { Calendar, Clock, LightbulbIcon, Quote, QuoteIcon, TextQuote } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import Comments from '@/components/Comments';
 
 interface Post {
   id: string;
@@ -65,6 +67,59 @@ function formatDate(dateString: string): string {
   });
 }
 
+async function getComments(slug: string) {
+  // Get all comments for this post
+  const { data: allComments } = await supabase
+    .from('comments')
+    .select('*')
+    .eq('post_slug', slug)
+    .eq('approved', true)
+    .order('created_at', { ascending: false });
+
+  if (!allComments) return [];
+
+  // Get likes count for each comment
+  const commentIds = allComments.map(c => c.id);
+  const { data: likes } = await supabase
+    .from('comment_likes')
+    .select('comment_id')
+    .in('comment_id', commentIds);
+
+  // Count likes per comment
+  const likesCount: Record<string, number> = {};
+  likes?.forEach(like => {
+    likesCount[like.comment_id] = (likesCount[like.comment_id] || 0) + 1;
+  });
+
+  // Organize comments into parent-child structure
+  const commentsMap: Record<string, any> = {};
+  const rootComments: any[] = [];
+
+  allComments.forEach(comment => {
+    const commentWithLikes = {
+      ...comment,
+      likes_count: likesCount[comment.id] || 0,
+      user_has_liked: false, // Will be updated on client side
+      replies: []
+    };
+    commentsMap[comment.id] = commentWithLikes;
+  });
+
+  allComments.forEach(comment => {
+    if (comment.parent_id) {
+      // This is a reply
+      if (commentsMap[comment.parent_id]) {
+        commentsMap[comment.parent_id].replies.push(commentsMap[comment.id]);
+      }
+    } else {
+      // This is a root comment
+      rootComments.push(commentsMap[comment.id]);
+    }
+  });
+
+  return rootComments;
+}
+
 export default async function BlogDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPost(slug);
@@ -76,6 +131,8 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
   const category = post.post_categories?.[0]?.categories?.name || 'General';
   const readTime = calculateReadTime(post.content);
   const formattedDate = formatDate(post.published_date);
+
+  const comments = await getComments((await params).slug);
 
   return (
     <div>
@@ -116,19 +173,20 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
               <h1 className="text-2xl md:text-3xl font-bold mb-6">
                 Introduction
               </h1>
-              <div className="text-base md:text-lg leading-relaxed whitespace-pre-line">
-                {post.content}
+
+              <div className="prose lg:prose-xl max-w-none mb-8">
+                <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             </div>
 
             {/* Specific Info Section */}
             {post.specific_info && (
               <div className="mt-8  p-6 md:p-10 border-l-4 border-[#fdbe21]">
-                <div className="">
-                  <QuoteIcon className="inline-block mb-2 text-black mr-2" />
-                  <span className='text-base font-bold md:text-2xl leading-relaxed whitespace-pre-line'>{post.specific_info}</span>
-                  <Quote className="inline-block mb-2 text-black ml-2" />
-                </div>
+                <ReactMarkdown>
+                  {/* <span className='text-base font-bold md:text-2xl leading-relaxed whitespace-pre-line'> */}
+                  {post.specific_info}
+                  {/* </span> */}
+                </ReactMarkdown>
 
                 <div className='flex items-center gap-4 mt-4'>
                   <div className='h-12 w-12 rounded-full bg-amber-400' />
@@ -170,6 +228,8 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                 </div>
               </div>
             )}
+
+            <Comments postSlug={(await params).slug} initialComments={comments} />
           </div>
         </div>
       </div>
