@@ -173,11 +173,11 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
+
           {/* Main Content */}
           <article className="lg:col-span-8">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-              
+
               <div className="flex items-center justify-center mb-6">
                 <span className="text-sm text-gray-600 dark:text-gray-300">Published {formattedDate}</span>
               </div>
@@ -197,7 +197,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                   {category}
                 </span>
               </div>
-              
+
               <div className="flex justify-center gap-6 mb-8 text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                   <Clock size={18} />
@@ -372,7 +372,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
           {/* Sidebar */}
           <aside className="lg:col-span-4">
             <div className="sticky top-8 space-y-6">
-              
+
               {/* Newsletter Signup */}
               <NewsletterSignup />
 
@@ -413,7 +413,8 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                   {['Technology', 'Tutorial', 'AI', 'Development'].map(cat => (
                     <Link
                       key={cat}
-                      href={`/blog/category/${cat.toLowerCase()}`}
+                      href={`/blog/`}
+                      // href={`/blog/category/${cat.toLowerCase()}`}
                       className="block px-3 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       {cat}
