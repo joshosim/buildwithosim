@@ -254,7 +254,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
               </div>
             )}
 
-            {/* Additional Images Gallery */}
+            {/* Additional Images Gallery
             {post.images && post.images.length > 0 && (
               <div className="mt-6 md:mt-8">
                 <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-900 dark:text-white">Gallery</h3>
@@ -270,7 +270,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
 
             {/* Conclusion Section */}
             {post.conclusion_content && (
