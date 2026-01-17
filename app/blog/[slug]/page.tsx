@@ -1,13 +1,11 @@
 import { Clock, LightbulbIcon } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Comments from '@/components/Comments';
 import NewsletterSignup from '@/components/blog/NewsletterSignup';
 import Link from 'next/link';
 import ViewTracker from '@/components/ViewTracker';
+import EnhancedMarkdown from '@/components/EnhancedMarkdown';
 
 interface Post {
   id: string;
@@ -19,6 +17,9 @@ interface Post {
   cover_image?: string;
   images?: string[];
   specific_info?: string;
+  specific_info_title?: string;
+  specific_info_author?: string;
+  specific_info_role?: string;
   conclusion_content?: string;
   published_date: string;
   created_at: string;
@@ -224,64 +225,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                 Introduction
               </h2>
 
-              <div className="prose prose-sm sm:prose md:prose-lg lg:prose-xl max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-a:text-[#fdbe21] prose-a:no-underline hover:prose-a:underline">
-                <ReactMarkdown
-                  components={{
-                    code({ node, inline, className, children, ...props }: any) {
-                      const match = /language-(\w+)/.exec(className || '');
-                      return !inline && match ? (
-                        <SyntaxHighlighter
-                          style={vscDarkPlus}
-                          language={match[1]}
-                          PreTag="div"
-                          {...props}
-                        >
-                          {String(children).replace(/\n$/, '')}
-                        </SyntaxHighlighter>
-                      ) : (
-                        <code className={className} {...props}>
-                          {children}
-                        </code>
-                      );
-                    },
-                    a({ href, children }: any) {
-                      const isInternal = href?.startsWith('/');
-                      return isInternal ? (
-                        <Link href={href} className="text-[#fdbe21] hover:underline">
-                          {children}
-                        </Link>
-                      ) : (
-                        <a
-                          href={href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#fdbe21] hover:underline"
-                        >
-                          {children}
-                        </a>
-                      );
-                    },
-                    img({ src, alt }: any) {
-                      return (
-                        <figure className="my-6 md:my-8">
-                          <img
-                            src={src}
-                            alt={alt}
-                            className="w-full rounded-lg shadow-md"
-                          />
-                          {alt && (
-                            <figcaption className="text-center text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-2">
-                              {alt}
-                            </figcaption>
-                          )}
-                        </figure>
-                      );
-                    },
-                  }}
-                >
-                  {post.content}
-                </ReactMarkdown>
-              </div>
+              <EnhancedMarkdown content={post.content} />
             </div>
 
             {/* Specific Info Section */}
@@ -289,16 +233,22 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
               <div className="mt-6 md:mt-8 p-4 md:p-6 lg:p-8 border-l-4 border-[#fdbe21] bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg md:rounded-xl">
                 <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-gray-900 dark:text-white flex items-center gap-2">
                   <span className="text-lg md:text-xl">💡</span>
-                  Key Takeaways
+                  {post.specific_info_title || 'Key Takeaways'}
                 </h3>
                 <div className="prose prose-sm md:prose dark:prose-invert mb-4 md:mb-6">
-                  <ReactMarkdown>{post.specific_info}</ReactMarkdown>
+                  <EnhancedMarkdown content={post.specific_info} />
                 </div>
                 <div className='flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg'>
-                  <div className='h-10 w-10 md:h-12 md:w-12 rounded-full bg-amber-400 flex-shrink-0' />
+                  <div className='h-10 w-10 md:h-12 md:w-12 rounded-full bg-gradient-to-r from-[#fdbe21] to-[#ff9a00] flex items-center justify-center text-white font-bold text-sm md:text-base flex-shrink-0'>
+                    {(post.specific_info_author || 'OU').split(' ').map(n => n[0]).join('').toUpperCase()}
+                  </div>
                   <div>
-                    <h4 className="text-sm md:text-base font-bold text-gray-900 dark:text-white">Osim Uka</h4>
-                    <p className="text-xs md:text-sm italic text-gray-600 dark:text-gray-300">Software Engineer</p>
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 dark:text-white">
+                      {post.specific_info_author || 'Osim Uka'}
+                    </h4>
+                    <p className="text-xs md:text-sm italic text-gray-600 dark:text-gray-300">
+                      {post.specific_info_role || 'Software Engineer'}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -330,7 +280,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                   <h3 className='text-lg md:text-2xl font-bold text-gray-900 dark:text-white'>Conclusion</h3>
                 </div>
                 <div className="prose prose-sm md:prose dark:prose-invert leading-relaxed text-gray-700 dark:text-gray-300">
-                  <ReactMarkdown>{post.conclusion_content}</ReactMarkdown>
+                  <EnhancedMarkdown content={post.conclusion_content} />
                 </div>
               </div>
             )}
