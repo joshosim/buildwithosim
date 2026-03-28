@@ -14,44 +14,44 @@ export default function Home() {
     setMounted(true)
   }, [])
 
-  const handleDownload = () => {
-    const link = document.createElement("a")
-    link.href = "/MyResume.pdf"
-    link.download = "osim.uka.resume.pdf"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+  // const handleDownload = () => {
+  //   const link = document.createElement("a")
+  //   link.href = "/MyResume.pdf"
+  //   link.download = "osim.uka.resume.pdf"
+  //   document.body.appendChild(link)
+  //   link.click()
+  //   document.body.removeChild(link)
+  // }
 
   const stats = [
     { label: "Years Experience", value: "2+" },
     { label: "Projects Completed", value: "5+" },
-    { label: "Happy Clients", value: "10+" },
+    { label: "Real Clients", value: "3+" },
   ]
 
   const services = [
     {
       icon: Code,
       title: "Web Development",
-      desc: "Modern, responsive websites and web applications",
+      desc: "I create modern websites that help businesses attract and convert customers.",
       color: "text-[#fdbe21]"
     },
     {
       icon: Code,
       title: "Mobile Apps",
-      desc: "Cross-platform mobile applications with React Native",
+      desc: "I build user-friendly mobile apps that deliver seamless experiences.",
       color: "text-[#ff9a00]"
     },
     {
       icon: Palette,
-      title: "UI/UX Design",
-      desc: "Beautiful, user-friendly interface designs",
+      title: "Landing Page for Creators",
+      desc: "I design high-converting landing pages for creators and brands.",
       color: "text-[#fdbe21]"
     },
     {
       icon: TrendingUp,
-      title: "Digital Products",
-      desc: "Templates, guides, and productivity tools",
+      title: "Digital Tools",
+      desc: "I create useful digital products that improve productivity and workflow.",
       color: "text-[#ff9a00]"
     },
   ]
@@ -65,20 +65,16 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <div className="inline-block bg-[#fdbe21] text-white px-4 py-2 rounded-full font-semibold">
-                👋 Welcome to my portfolio
-              </div>
-
               <h1 className="text-4xl md:text-6xl font-bold leading-tight text-gray-900 dark:text-white">
                 Hi, I'm <span className="text-[#fdbe21]">Osim Uka</span>
               </h1>
-
-              <h2 className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-normal">
-                Software Developer • Creative Designer • Digital Creator
-              </h2>
-
+              <h1 className="text-base md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                Software Developer for Businesses & Creators
+              </h1>
               <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                I build modern web & mobile applications, create digital products, and share insights on personal development and finance.
+                I build websites and apps that help businesses attract customers and grow online.
+
+                I work with brands, creators, and businesses to turn ideas into clean, high-converting digital products.
               </p>
 
               <div className="flex flex-wrap gap-4">
@@ -86,16 +82,16 @@ export default function Home() {
                   href="/projects"
                   className="bg-[#fdbe21] hover:bg-[#ff9a00] text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition-colors"
                 >
-                  View Projects
+                  View My Work
                   <ArrowRight size={20} />
                 </Link>
 
                 <button
-                  onClick={handleDownload}
+                  onClick={() => { }}
                   className="border-2 border-[#fdbe21] text-[#fdbe21] hover:bg-[#fdbe21] hover:text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition-colors"
                 >
                   <Download size={20} />
-                  Download CV
+                  Get a website
                 </button>
               </div>
             </div>
@@ -247,23 +243,18 @@ export default function Home() {
           </h2>
 
           <p className="text-base md:text-xl mb-8 opacity-90">
-            Have a project in mind? Let's create something amazing together.
-          </p>
+            Have a business idea or need a website?
+
+            Let’s build something that brings you customers and grows your brand. </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/contact"
               className="bg-white text-[#fdbe21] hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-colors"
             >
-              Get In Touch
+              Start a Project
             </Link>
 
-            <Link
-              href="/shop"
-              className="border-2 border-white text-white hover:bg-white hover:text-[#fdbe21] px-6 py-3 rounded-lg font-semibold transition-colors"
-            >
-              View Digital Products
-            </Link>
           </div>
         </div>
       </section>

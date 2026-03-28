@@ -27,7 +27,7 @@ export default function Header() {
     <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xs border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="flex items-center gap-3 border-r border-gray-200 dark:border-gray-700 pr-4 mr-4 md:border-r-2">
+          <div className="flex items-center gap-3">
             <button
               className="md:hidden cursor-pointer text-gray-700 dark:text-gray-300"
               onClick={toggleMenu}
@@ -48,29 +48,28 @@ export default function Header() {
               <span className="hidden md:block">BUILDWITHOSIM</span>
             </Link>
           </div>
-
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-              Home
-            </Link>
-            <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-              Projects
-            </Link>
-            <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-              Blog
-            </Link>
-            <Link href="/shop" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-              Shop
-            </Link>
-            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-              About
-            </Link>
-          </nav>
         </div>
-
+        <nav className="hidden md:flex items-center gap-6">
+          <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+            Home
+          </Link>
+          <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+            Projects
+          </Link>
+          <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+            Blog
+          </Link>
+          {/* <Link href="/shop" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+              Shop
+            </Link> */}
+          <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+            About
+          </Link>
+          <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+            Contact
+          </Link>
+        </nav>
         <div className="flex items-center gap-3">
-          <Search className="hidden md:block text-gray-600 dark:text-gray-400" size={20} />
-
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -83,21 +82,14 @@ export default function Header() {
             )}
           </button>
 
-          <button
+          {/* <button
             onClick={sendMessage}
             className="flex items-center gap-2 cursor-pointer"
           >
             <span className="hidden md:block text-gray-700 dark:text-gray-300">Support</span>
             <DollarSign className="md:hidden text-gray-600 dark:text-gray-400" size={20} />
-          </button>
+          </button> */}
 
-          <Link
-            href="/contact"
-            className="bg-[#fdbe21] hover:bg-[#ff9a00] text-white px-4 py-2 rounded-md font-semibold flex items-center gap-2 transition-colors"
-          >
-            <Plus size={16} />
-            Follow
-          </Link>
         </div>
       </div>
 

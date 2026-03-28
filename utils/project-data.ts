@@ -5,7 +5,7 @@ export const data = [
   {
     id: 0,
     title: "Resume & CV Builder",
-    desc: "A professional mobile app for creating stunning resumes with sleek templates, easy editing, and expert tips to help users stand out and land their dream jobs.",
+    desc: "A mobile app that helps users create professional resumes quickly and stand out when applying for jobs.",
     link: "https://play.google.com/store/apps/details?id=com.fonstudios.cvbuilder",
     image: "https://play-lh.googleusercontent.com/vbPCVr3TotkXNNU8L361rWp2BlZl4Zvm6ZaHa9arv6Xbuoll7x-nSKimvzp3K0THiW56=w480-h960-rw",
     tools: ["React Native", "Mobile Development"],
@@ -14,7 +14,7 @@ export const data = [
   {
     id: 1,
     title: "CustomerApp & ParkManagerApp",
-    desc: "A comprehensive bus booking platform that allows users to book tickets from multiple parks, compare prices, and secure seats seamlessly.",
+    desc: "A booking platform that allows users to compare transport options and book tickets easily.",
     link: "https://move9ja.com/",
     image: Move9ja,
     tools: ["React", "Product Development", "UI/UX"],

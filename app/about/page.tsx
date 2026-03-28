@@ -7,7 +7,7 @@ export default function About() {
   const techStack = [
     'JavaScript', 'TypeScript', 'React', 'React Native',
     'Tailwind CSS', 'MUI', 'Web Development',
-    'Mobile Development', 'Graphic Design', 'Video Editing'
+    'Mobile Development'
   ];
 
   return (
@@ -31,27 +31,20 @@ export default function About() {
           About Me
         </h2>
         <p className="px-4 font-light text-base md:text-xl mx-0 md:mx-[20%] py-2 text-center leading-relaxed text-gray-700 dark:text-gray-300">
-          I'm a self-taught software developer from Nigeria with a passion for creating digital solutions that make a difference.
-          My journey into tech began with Java, which sparked my love for programming and problem-solving.
-        </p>
-        <p className="px-4 font-light text-base md:text-xl mx-0 md:mx-[20%] py-2 text-center leading-relaxed text-gray-700 dark:text-gray-300">
-          I specialize in building modern web and mobile applications using React, TypeScript, and React Native.
-          With over 2 years of hands-on experience, I've developed projects ranging from school management systems
-          to e-commerce platforms and mobile apps.
-        </p>
-        <p className="px-4 font-light text-base md:text-xl mx-0 md:mx-[20%] py-2 text-center leading-relaxed text-gray-700 dark:text-gray-300">
-          Beyond coding, I'm a creative designer, content creator, and digital entrepreneur. I create digital products,
-          share insights on personal development and finance, and help others build better lives through practical resources.
-        </p>
-        <p className="px-4 font-light text-base md:text-xl mx-0 md:mx-[20%] py-2 text-center leading-relaxed text-gray-700 dark:text-gray-300">
-          I believe in continuous learning and staying ahead in the ever-evolving tech landscape.
-          Whether it's building scalable applications, designing intuitive interfaces, or creating valuable digital content,
-          I'm committed to delivering quality work that exceeds expectations.
-        </p>
-        <p className="px-4 font-light text-base md:text-xl mx-0 md:mx-[20%] py-2 text-center leading-relaxed text-gray-700 dark:text-gray-300">
-          Let's collaborate on your next project or connect to discuss opportunities in software development,
-          design, or digital product creation.
-        </p>
+          I’m a software developer who helps businesses and creators build modern websites and apps that attract customers and grow their brand online.
+
+          I started my journey in tech with Java and quickly developed a strong passion for building digital solutions and solving real-world problems.
+
+          I build responsive websites and mobile apps that are fast, user-friendly, and designed to convert visitors into customers.
+
+          Over the past 2+ years, I’ve worked on projects including e-commerce platforms, booking systems, and mobile applications, helping businesses improve their online presence and user experience.
+
+          I also create digital tools and resources that help individuals and businesses improve productivity and grow.
+
+          If you’re looking for a developer to build a clean, modern website or app for your business, I’d love to work with you.
+
+          Let’s create something that delivers real results. </p>
+
 
         <h2 className="text-4xl md:text-5xl font-bold mt-20 mb-8 text-center text-[#fdbe21]">
           My Tech Stack
