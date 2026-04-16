@@ -6,7 +6,7 @@ import AvatarImage from '../public/logo.png'
 
 export default function Footer() {
   return (
-    <footer className="text-center py-10 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <footer className="text-center py-12 px-6 border-t border-gray-800">
       <Image
         src={AvatarImage}
         alt="Osim Uka"
