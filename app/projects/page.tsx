@@ -19,7 +19,7 @@ export default function Projects() {
   });
 
   return (
-    <div className="bg-white dark:bg-gray-900 min-h-screen">
+    <div className="bg-black min-h-screen">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#fdbe21]">

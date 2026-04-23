@@ -1,51 +1,28 @@
 'use client'
 
 import Image from 'next/image'
-import { Facebook, Github, Instagram, Linkedin, Twitter } from 'lucide-react'
 import AvatarImage from '../public/logo.png'
 
 export default function Footer() {
+
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="text-center py-12 px-6 border-t border-gray-800">
-      <Image
-        src={AvatarImage}
-        alt="Osim Uka"
-        width={175}
-        height={175}
-        className="mx-auto rounded-lg object-cover"
-      />
-
-      <div className="flex items-center justify-center gap-6 mb-6">
-        <Facebook
-          size={30}
-          className="text-gray-500 dark:text-gray-400 cursor-pointer hover:text-[#fdbe21] transition-colors"
-          onClick={() => window.open("https://www.facebook.com/uka.osim.56", "_blank")}
+    <footer className="py-12 px-6 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <Image
+          src={AvatarImage}
+          alt="Osim Uka"
+          width={175}
+          height={175}
+          className="rounded-lg object-cover"
         />
-        <Linkedin
-          size={30}
-          className="text-gray-500 dark:text-gray-400 cursor-pointer hover:text-[#fdbe21] transition-colors"
-          onClick={() => window.open("https://www.linkedin.com/in/uka-osim-9761601a0/", "_blank")}
-        />
-        <Instagram
-          size={30}
-          className="text-gray-500 dark:text-gray-400 cursor-pointer hover:text-[#fdbe21] transition-colors"
-          onClick={() => window.open("https://www.instagram.com/ukaosim/", "_blank")}
-        />
-        <Twitter
-          size={30}
-          className="text-gray-500 dark:text-gray-400 cursor-pointer hover:text-[#fdbe21] transition-colors"
-          onClick={() => window.open("https://x.com/teamjojo_code", "_blank")}
-        />
-        <Github
-          size={30}
-          className="text-gray-500 dark:text-gray-400 cursor-pointer hover:text-[#fdbe21] transition-colors"
-          onClick={() => window.open("https://github.com/joshosim", "_blank")}
-        />
+        <p className="text-gray-500 text-sm">© {currentYear} Osim Uka. All rights reserved.</p>
+        <div className="flex gap-6">
+          <a href="#" className="text-gray-500 hover:text-white transition-colors text-sm">Privacy</a>
+          <a href="#" className="text-gray-500 hover:text-white transition-colors text-sm">Terms</a>
+        </div>
       </div>
-
-      <p className="text-xs text-gray-500 dark:text-gray-400">
-        © {new Date().getFullYear()} BUILDWITHOSIM. All rights reserved.
-      </p>
     </footer>
   )
 }

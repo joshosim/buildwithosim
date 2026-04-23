@@ -48,7 +48,7 @@ export default async function Blog() {
   const posts = await getPosts();
 
   return (
-    <div className="bg-white dark:bg-gray-900 min-h-screen">
+    <div className="bg-black min-h-screen">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         {/* Header Section */}
         <div className="text-center mb-16">

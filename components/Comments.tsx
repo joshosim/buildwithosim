@@ -217,7 +217,7 @@ export default function Comments({ postSlug, initialComments }: CommentsProps) {
       <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
         {/* Author info */}
         <div className="flex items-start gap-3 mb-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
+          <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
             {comment.author_name[0].toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
@@ -271,7 +271,7 @@ export default function Comments({ postSlug, initialComments }: CommentsProps) {
               value={replyContent}
               onChange={(e) => setReplyContent(e.target.value)}
               placeholder="Write a reply..."
-              className="w-full p-3 border rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-3 text-black placeholder:text-gray-500 border rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               rows={3}
             />
             <div className="flex gap-2 mt-2">
@@ -307,13 +307,13 @@ export default function Comments({ postSlug, initialComments }: CommentsProps) {
   );
 
   return (
-    <div className="mt-16 pt-8 border-t">
+    <div className="mt-16 pt-8 border-t ">
       <h2 className="text-2xl md:text-3xl font-bold mb-8">
         Comments ({comments.reduce((acc, c) => acc + 1 + (c.replies?.length || 0), 0)})
       </h2>
 
       {/* Comment Form */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 md:p-8 rounded-xl mb-8 border border-blue-100">
+      <div className="bg-gray-50 p-6 md:p-8 rounded-xl mb-8 border border-blue-100">
         <h3 className="text-lg font-semibold mb-4 text-gray-900">Join the conversation</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid md:grid-cols-2 gap-4">
@@ -322,7 +322,7 @@ export default function Comments({ postSlug, initialComments }: CommentsProps) {
               placeholder="Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full text-black placeholder:text-gray-500 p-3 border border-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             />
             <input
@@ -330,7 +330,7 @@ export default function Comments({ postSlug, initialComments }: CommentsProps) {
               placeholder="Your Email (won't be published)"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full text-black placeholder:text-gray-500 p-3 border border-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             />
           </div>
@@ -338,8 +338,9 @@ export default function Comments({ postSlug, initialComments }: CommentsProps) {
             placeholder="Share your thoughts..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg h-32 resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full text-black placeholder:text-gray-500 p-3 border border-black rounded-lg h-32 resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             required
+
           />
           <button
             type="submit"
