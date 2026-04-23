@@ -153,7 +153,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
   const recentPosts = await getRecentPosts();
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <div className="bg-black min-h-screen">
       <ViewTracker postSlug={slug} />
       {/* Breadcrumbs */}
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">

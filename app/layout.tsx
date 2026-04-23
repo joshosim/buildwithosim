@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Space_Grotesk, Inter } from 'next/font/google';
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Providers from '@/components/Providers'
 import ScrollToTop from '@/components/ScrollToTop'
 
-const poppins = Poppins({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700']
 })
@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={spaceGrotesk.className}>
         <Providers>
           <ScrollToTop />
           <Header />

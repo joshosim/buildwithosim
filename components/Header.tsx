@@ -49,46 +49,19 @@ export default function Header() {
             </Link>
           </div>
         </div>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-            Home
-          </Link>
-          <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-            Projects
-          </Link>
-          <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-            Blog
-          </Link>
-          {/* <Link href="/shop" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-              Shop
-            </Link> */}
-          <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-            About
-          </Link>
-          <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-            Contact
-          </Link>
-        </nav>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? (
-              <Sun size={20} className="text-gray-600 dark:text-gray-400" />
-            ) : (
-              <Moon size={20} className="text-gray-600 dark:text-gray-400" />
-            )}
-          </button>
-
-          {/* <button
-            onClick={sendMessage}
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <span className="hidden md:block text-gray-700 dark:text-gray-300">Support</span>
-            <DollarSign className="md:hidden text-gray-600 dark:text-gray-400" size={20} />
-          </button> */}
+        <div className='flex items-center gap-6'>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+              Projects
+            </Link>
+            <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+              Blog
+            </Link>
+            <Link href="#about" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+              About
+            </Link>
+            <a href="#contact" className="btn-primary px-6 py-2 rounded-full text-sm font-medium">Let's Talk</a>
+          </nav>
 
         </div>
       </div>
