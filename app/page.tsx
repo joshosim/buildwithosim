@@ -78,8 +78,8 @@ export default function Home() {
       name: "Engr Uka Osim (Snr)", role: "CEO, 4onstudiosLTD", initials: "UO", gradient: "from-indigo-400 to-purple-400",
     },
     {
-      quote: "Working with Osim was a game-changer for our startup. He built our MVP in record time and the code quality was exceptional. Highly recommend!",
-      name: "Michael Chen", role: "Founder, TechStart", initials: "MC", gradient: "from-pink-400 to-orange-400",
+      quote: "I have to say this is lovely bro. From start to finish, you handled everything with so much excellence and care. I am genuinely impressed with result and the professionalism you showed. Thank you for making this such a smooth experience. I'll definitely recommend you to anyone!",
+      name: "Oluwatobi Timothy", role: "Professional Graphics Designer", initials: "KB", gradient: "from-pink-400 to-orange-400",
     },
     {
       quote: "Osim's landing page design increased our conversion rate by 60%. He understood our brand perfectly and delivered beyond what we imagined.",

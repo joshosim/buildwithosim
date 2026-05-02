@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, Search, DollarSign, Plus, Moon, Sun } from 'lucide-react'
 import AvatarImage from '../public/logo.png'
 import { useTheme } from '@/contexts/ThemeContext'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,13 +24,19 @@ export default function Header() {
     window.open(finalUrl, '_blank')?.focus()
   }
 
+  const pathname = usePathname();
+
+  useEffect(() => {
+
+  }, []);
+
   return (
-    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xs border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 p-4">
+    <header className="bg-gray-900/80 backdrop-blur-xs border-b border-gray-800 sticky top-0 z-50 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="flex items-center gap-3">
             <button
-              className="md:hidden cursor-pointer text-gray-700 dark:text-gray-300"
+              className="md:hidden cursor-pointer text-gray-300"
               onClick={toggleMenu}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -43,7 +50,7 @@ export default function Header() {
               className="rounded-full"
             />
 
-            <Link href="/" className="cursor-pointer font-bold text-[#fdbe21]">
+            <Link href="/" className="cursor-pointer font-bold">
               <span className="block md:hidden">BWO</span>
               <span className="hidden md:block">BUILDWITHOSIM</span>
             </Link>
@@ -51,16 +58,22 @@ export default function Header() {
         </div>
         <div className='flex items-center gap-6'>
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+            <Link href="/projects"
+              className={`${!pathname.startsWith("/projects") ? "text-gray-300" : "text-[#a855f7]"}
+               hover:text-[#a855f7] font-medium transition-colors`}>
               Projects
             </Link>
-            <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
+            <Link href="/blog"
+              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-[#a855f7]"}
+             hover:text-[#a855f7] font-medium transition-colors`}>
               Blog
             </Link>
-            <Link href="#about" className="text-gray-700 dark:text-gray-300 hover:text-[#fdbe21] font-medium transition-colors">
-              About
-            </Link>
-            <a href="#contact" className="btn-primary px-6 py-2 rounded-full text-sm font-medium">Let's Talk</a>
+            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+              <Link href="#about" className="text-gray-300 hover:text-[#a855f7] font-medium transition-colors">
+                About
+              </Link>}
+            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+              <a href="#contact" className="btn-primary px-6 py-2 rounded-full text-sm font-medium">Let's Talk</a>}
           </nav>
 
         </div>
@@ -72,46 +85,35 @@ export default function Header() {
           <nav className="flex flex-col">
             <Link
               href="/"
-              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/projects"
-              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Projects
             </Link>
             <Link
               href="/blog"
-              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Blog
             </Link>
+
             <Link
-              href="/shop"
-              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Shop
-            </Link>
-            <Link
-              href="/about"
-              className="py-3 px-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+              href="#about"
+              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               About
             </Link>
-            <Link
-              href="/contact"
-              className="py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </Link>
+            <a href="#contact" className="btn-primary flex px-6 py-2 m-2 justify-center items-center rounded-full text-sm font-medium">Let's Talk</a>
+
           </nav>
         </div>
       )}

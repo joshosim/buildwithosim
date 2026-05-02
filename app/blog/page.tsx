@@ -52,7 +52,7 @@ export default async function Blog() {
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#fdbe21]">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4">
             Blog & Resources
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-base md:text-xl max-w-2xl mx-auto">
@@ -68,7 +68,7 @@ export default async function Blog() {
             </p>
             <Link
               href="/admin"
-              className="inline-block bg-[#fdbe21] text-white px-6 py-3 rounded-lg hover:bg-[#e5ab1e] transition"
+              className="inline-block bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-400 hover:text-white transition"
             >
               Create Your First Post
             </Link>
