@@ -81,39 +81,43 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-50 dark:bg-gray-800 mt-4 rounded-lg">
+        <div className="md:hidden bg-gray-800 mt-4 rounded-lg">
           <nav className="flex flex-col">
             <Link
               href="/"
-              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
+              className={`${!pathname.startsWith("/") ? "text-gray-300" : "text-[#a855f7]"}
+                py-3 px-4 border-b border-gray-700 hover:bg-gray-700 transition-colors`}
               onClick={() => setIsOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/projects"
-              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
+              className={`${!pathname.startsWith("/projects") ? "text-gray-300" : "text-[#a855f7]"}
+                py-3 px-4 border-b border-gray-700 hover:bg-gray-700 transition-colors`}
               onClick={() => setIsOpen(false)}
             >
               Projects
             </Link>
             <Link
               href="/blog"
-              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
+              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-[#a855f7]"}
+                py-3 px-4 border-b border-gray-700 hover:bg-gray-700 transition-colors`}
               onClick={() => setIsOpen(false)}
             >
               Blog
             </Link>
-
-            <Link
-              href="#about"
-              className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </Link>
-            <a href="#contact" className="btn-primary flex px-6 py-2 m-2 justify-center items-center rounded-full text-sm font-medium">Let's Talk</a>
-
+            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+              <Link
+                href="#about"
+                className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                About
+              </Link>}
+            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+              <a href="#contact" className="btn-primary flex px-6 py-2 m-2 justify-center items-center rounded-full text-sm font-medium">Let's Talk</a>
+            }
           </nav>
         </div>
       )}
