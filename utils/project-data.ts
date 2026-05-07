@@ -1,5 +1,6 @@
 const ridesure = "/ridesure.png";
 const Move9ja = "/image.png";
+import Kilobyte from "../public/kilobyted.png"
 
 export const data = [
   {
@@ -27,7 +28,7 @@ export const data = [
     title: "Kilobyte Studios",
     desc: "A portfolio website of a professional graphics designer based in Africa.",
     link: "https://kilobyte-five.vercel.app/",
-    image: "https://plus.unsplash.com/premium_photo-1670869816731-97a307d1c7ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmVkZGluZ3N8ZW58MHx8MHx8fDA%3D",
+    image: Kilobyte,
     tools: ["Nextjs", "Tailwind CSS", "TypeScript"],
     role: "Solo Project(04/2026)",
     type: "Personal Brand"
