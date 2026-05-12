@@ -2,7 +2,18 @@ const ridesure = "/ridesure.png";
 const Move9ja = "/image.png";
 import Kilobyte from "../public/kilobyted.png"
 
-export const data = [
+interface DataProps {
+  id: number,
+  title: string,
+  desc: string,
+  link: string,
+  image: any,
+  tools: string[],
+  role: string,
+  type: string
+}
+
+export const data: DataProps[] = [
   {
     id: 0,
     title: "Resume & CV Builder",
