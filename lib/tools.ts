@@ -8,6 +8,7 @@ const transport = nodemailer.createTransport(
     token: process.env.MAILTRAP_TOKEN!,
   })
 );
+
 interface MessageProps {
   name: string;
   email: string;
