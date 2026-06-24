@@ -210,7 +210,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured <span className="gradient-text">Projects</span></h2>
+              <h2 className="text-4xl md:text-5xl font-bold font-instrument mb-4">Featured <span className="italic text-[#6366f1]">Projects</span></h2>
               <p className="text-gray-400 max-w-xl">A selection of my recent work showcasing different technologies and solutions.</p>
             </div>
             <a href="/projects" className="mt-4 md:mt-0 text-indigo-400 hover:text-indigo-300 flex items-center gap-2 transition-colors">
@@ -224,7 +224,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {data.slice(0, 3).map((project) => (
               <div key={project.id} className="project-card glass rounded-2xl overflow-hidden reveal">
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-600">
+                <div className="relative h-48 overflow-hidden bg-linear-to-br from-indigo-600 to-purple-600">
                   <div className="h-48 overflow-hidden">
                     <Image src={project.image} alt={project.title} width={400} height={200} className="w-full h-full object-cover" />
                   </div>
@@ -267,9 +267,9 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="reveal">
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl opacity-20 blur-2xl" />
+                <div className="absolute -inset-4 bg-lineaer-to-r from-indigo-500 to-purple-500 rounded-3xl opacity-20 blur-2xl" />
                 <div className="glass-strong rounded-3xl p-8 relative">
-                  <div className="w-full h-80 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                  <div className="w-full h-80 rounded-2xl bg-lineaer-to-br from-gray-800 to-gray-900 flex items-center justify-center">
                     <Image src={Avatar} alt="Osim Uka" className="w-full h-80 object-cover rounded-xl border-4 border-white shadow-lg" />
                   </div>
                 </div>
@@ -277,7 +277,7 @@ export default function Home() {
             </div>
 
             <div className="reveal">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Behind the <span className="gradient-text">Code</span></h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 font-instrument">Behind the <span className="italic text-[#6366f1]">Code</span></h2>
               <p className="text-gray-400 text-lg mb-6 leading-relaxed">
                 I'm Osim Uka, a passionate full-stack developer with a love for creating digital experiences that make a difference. With 3+ years of experience, I've helped businesses transform their ideas into reality.
               </p>
@@ -298,7 +298,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <a href="#contact" className="btn-primary px-8 py-3 rounded-full font-medium inline-flex items-center gap-2">
+              <a href="#contact" className="btn-primary px-8 py-3 text-[#6366f1] italic font-instrument rounded-full font-medium inline-flex items-center gap-2">
                 Let's Work Together
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -313,7 +313,7 @@ export default function Home() {
       <section id="testimonials" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Client <span className="gradient-text">Stories</span></h2>
+            <h2 className="text-4xl md:text-5xl font-instrument  font-medium mb-4">Client <span className="italic text-[#6366f1] f">Stories</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Don't just take my word for it—here's what clients say about working with me.</p>
           </div>
 
@@ -347,7 +347,7 @@ export default function Home() {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Tech <span className="gradient-text">Stack</span></h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-instrument">Tech <span className="text-[#6366f1] italic">Stack</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Modern tools and technologies I use to build exceptional digital experiences.</p>
           </div>
 

@@ -80,7 +80,7 @@ export default function Chat() {
     <section className="w-full max-w-2xl mx-auto px-4 py-12">
       {/* Header */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-white mb-2">Chat with BuildWithOsim AI</h2>
+        <h2 className="text-3xl font-bold mb-2 font-instrument">Chat with <span className="italic text-[#6366f1] ">BuildWithOsim AI</span></h2>
         <p className="text-gray-400">Ask me anything about my work and experience</p>
       </div>
 
