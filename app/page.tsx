@@ -136,7 +136,7 @@ export default function Home() {
             <p className="text-indigo-400 font-medium mb-4 tracking-wider text-sm uppercase">
               Full Stack Developer & Digital Craftsman
             </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-9xl font-instrument italic font-bold mb-6 leading-tight">
               Building Digital<br />
               <span className="gradient-text">Experiences</span> That Matter
             </h1>
@@ -182,7 +182,7 @@ export default function Home() {
       <section id="services" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">What I <span className="gradient-text">Create</span></h2>
+            <h2 className="text-4xl md:text-5xl font-instrument font-bold mb-4">What I <span className="text-[#a855f7] italic">Create</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto">End-to-end digital solutions tailored to your unique needs and goals.</p>
           </div>
 

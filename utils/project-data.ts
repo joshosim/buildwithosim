@@ -17,6 +17,16 @@ interface DataProps {
 
 export const data: DataProps[] = [
   {
+    id: 7,
+    title: "Recall",
+    desc: "A mobile app that helps users find and book rides easily, with real-time tracking and secure payments.",
+    link: "",
+    image: Move9ja,
+    tools: ["Nextjs", "PWA"],
+    role: "Solo porject (06/2026)",
+    type: "Customer Reminder"
+  },
+  {
     id: 6,
     title: "SoundSkill Hub",
     desc: "An education and learning platform for music and sound skills, helping creatives grow their craft online.",
