@@ -63,16 +63,12 @@ export default function Header() {
                hover:text-[#a855f7] font-medium transition-colors`}>
               Projects
             </Link>
-            <Link href="/blog"
-              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-[#a855f7]"}
-             hover:text-[#a855f7] font-medium transition-colors`}>
-              Blog
-            </Link>
-            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+
+            {pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
               <Link href="#about" className="text-gray-300 hover:text-[#a855f7] font-medium transition-colors">
                 About
               </Link>}
-            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+            {pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
               <a href="#contact" className="btn-primary px-6 py-2 rounded-full text-sm font-medium">Let's Talk</a>}
           </nav>
 
@@ -99,15 +95,8 @@ export default function Header() {
             >
               Projects
             </Link>
-            <Link
-              href="/blog"
-              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-[#a855f7]"}
-                py-3 px-4 border-b border-gray-700 hover:bg-gray-700 transition-colors`}
-              onClick={() => setIsOpen(false)}
-            >
-              Blog
-            </Link>
-            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+
+            {pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
               <Link
                 href="#about"
                 className="py-3 px-4 border-b border-gray-700 hover:bg-gray-700 text-gray-300 transition-colors"
@@ -115,7 +104,7 @@ export default function Header() {
               >
                 About
               </Link>}
-            {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
+            {pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
               <a href="#contact" className="btn-primary flex px-6 py-2 m-2 justify-center items-center rounded-full text-sm font-medium">Let's Talk</a>
             }
           </nav>

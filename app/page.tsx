@@ -16,14 +16,25 @@ export default function Home() {
           const element = entry.target as HTMLElement
           element.classList.add('active')
           element.style.opacity = '1'
-          element.style.transform = 'translateY(0)'
+          element.style.transform = 'translateY(0) translateZ(0)'
+          
+          // Add staggered animation for child elements
+          const parent = element.closest('.grid')
+          if (parent) {
+            const children = Array.from(parent.children)
+            children.forEach((child, index) => {
+              if (child !== element) {
+                (child as HTMLElement).style.animationDelay = `${index * 0.1}s`
+              }
+            })
+          }
         }),
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     )
 
     document.querySelectorAll('.reveal').forEach((element) => {
       const revealElement = element as HTMLElement
-      revealElement.style.transition = 'opacity 0.6s ease, transform 0.6s ease'
+      revealElement.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
       observer.observe(revealElement)
     })
 
