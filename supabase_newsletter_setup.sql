@@ -1,2 +1,0 @@
--- This SQL script sets up a newsletter subscription system using Supabase.
--- It creates a table for subscribers, adds necessary indexes, and defines security policies.
