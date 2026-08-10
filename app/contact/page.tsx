@@ -135,7 +135,7 @@ export default function Contact() {
                     <input
                       {...field}
                       placeholder="Name"
-                      className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21]"
+                      className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     {errors.name && (
                       <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
@@ -152,7 +152,7 @@ export default function Contact() {
                     <input
                       {...field}
                       placeholder="Email"
-                      className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21]"
+                      className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     {errors.email && (
                       <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
@@ -171,7 +171,7 @@ export default function Contact() {
                     {...field}
                     rows={5}
                     placeholder="Message"
-                    className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#fdbe21] resize-none"
+                    className="w-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                   />
                   {errors.message && (
                     <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>

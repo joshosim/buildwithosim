@@ -16,18 +16,18 @@ export default function About() {
         <div className="flex flex-col-reverse md:flex-row items-center justify-center">
           <div className="flex flex-col items-center justify-center">
             <p className="font-normal text-sm text-gray-600 dark:text-gray-300">Experience</p>
-            <p className="font-semibold text-[#fdbe21] text-3xl">2+ Years</p>
+            <p className="font-semibold text-blue-500 text-3xl">2+ Years</p>
           </div>
           <div className="h-96 w-80">
             <Side />
           </div>
           <div className="flex flex-col items-center justify-center">
             <p className="font-normal text-sm text-gray-600 dark:text-gray-300">Projects</p>
-            <p className="font-semibold text-[#fdbe21] text-3xl">5+</p>
+            <p className="font-semibold text-blue-500 text-3xl">5+</p>
           </div>
         </div>
 
-        <h2 className="text-4xl md:text-6xl font-bold text-center text-[#fdbe21] mt-8">
+        <h2 className="text-4xl md:text-6xl font-bold text-center text-blue-500 mt-8">
           About Me
         </h2>
         <p className="px-4 font-light text-base md:text-xl mx-0 md:mx-[20%] py-2 text-center leading-relaxed text-gray-700 dark:text-gray-300">
@@ -46,13 +46,13 @@ export default function About() {
           Let’s create something that delivers real results. </p>
 
 
-        <h2 className="text-4xl md:text-5xl font-bold mt-20 mb-8 text-center text-[#fdbe21]">
+        <h2 className="text-4xl md:text-5xl font-bold mt-20 mb-8 text-center text-blue-500">
           My Tech Stack
         </h2>
         <div className="flex flex-wrap px-4 mx-0 md:mx-[20%] justify-center items-center mb-20">
           {techStack.map((tech, index) => (
             <motion.div key={tech} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: index * 0.1, duration: 1, type: 'spring', stiffness: 100 }}>
-              <span className="m-2 px-4 md:px-6 py-2 md:py-3 text-sm md:text-lg font-semibold cursor-pointer bg-white dark:bg-gray-800 border-2 border-[#fdbe21]/20 text-[#fdbe21] rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-[#fdbe21] hover:text-white hover:border-transparent inline-block">
+              <span className="m-2 px-4 md:px-6 py-2 md:py-3 text-sm md:text-lg font-semibold cursor-pointer bg-white dark:bg-gray-800 border-2 border-blue-500/20 text-blue-500 rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-600 hover:text-white hover:border-transparent inline-block">
                 {tech}
               </span>
             </motion.div>

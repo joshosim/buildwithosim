@@ -56,7 +56,7 @@ export default function ManagePosts() {
           </h1>
           <Link
             href="/admin"
-            className="bg-[#fdbe21] hover:bg-[#ff9a00] text-white px-4 py-2 rounded-lg font-semibold"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold"
           >
             Create New Post
           </Link>

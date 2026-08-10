@@ -53,7 +53,7 @@ export default function BlogCard({ post }: { post: Post }) {
         className="w-full h-48 object-cover"
       />
       <div className="p-6 flex-grow flex flex-col">
-        <span className="inline-block mb-4 px-3 py-1 bg-[#fdbe21] text-white text-xs font-semibold rounded-full w-fit">
+        <span className="inline-block mb-4 px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full w-fit">
           {category}
         </span>
 

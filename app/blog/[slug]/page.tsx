@@ -159,9 +159,9 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-            <Link href="/" className="hover:text-[#fdbe21]">Home</Link>
+            <Link href="/" className="hover:text-blue-500">Home</Link>
             <span>/</span>
-            <Link href="/blog" className="hover:text-[#fdbe21]">Blog</Link>
+            <Link href="/blog" className="hover:text-blue-500">Blog</Link>
             <span>/</span>
             <span className="text-gray-900 dark:text-white truncate">{post.title}</span>
           </div>
@@ -190,7 +190,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
               )}
 
               <div className="flex justify-center items-center mb-4 md:mb-6">
-                <span className="inline-block px-3 md:px-4 py-1.5 md:py-2 bg-[#fdbe21] text-white font-semibold rounded-full text-sm md:text-base">
+                <span className="inline-block px-3 md:px-4 py-1.5 md:py-2 bg-blue-600 text-white font-semibold rounded-full text-sm md:text-base">
                   {category}
                 </span>
               </div>
@@ -230,7 +230,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
 
             {/* Specific Info Section */}
             {post.specific_info && (
-              <div className="mt-6 md:mt-8 p-4 md:p-6 lg:p-8 border-l-4 border-[#fdbe21] bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg md:rounded-xl">
+              <div className="mt-6 md:mt-8 p-4 md:p-6 lg:p-8 border-l-4 border-blue-500 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg md:rounded-xl">
                 <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-gray-900 dark:text-white flex items-center gap-2">
                   <span className="text-lg md:text-xl">💡</span>
                   {post.specific_info_title || 'Key Takeaways'}
@@ -304,7 +304,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                         />
                       )}
                       <div className="p-3 md:p-4">
-                        <h4 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white group-hover:text-[#fdbe21] line-clamp-2">
+                        <h4 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 line-clamp-2">
                           {related.title}
                         </h4>
                       </div>
@@ -344,7 +344,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
                         />
                       )}
                       <div className="flex-1">
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-[#fdbe21] line-clamp-2">
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 line-clamp-2">
                           {recent.title}
                         </h4>
                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">

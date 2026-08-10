@@ -182,7 +182,7 @@ export default function Home() {
       <section id="services" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl md:text-5xl font-instrument font-bold mb-4">What I <span className="text-[#a855f7] italic">Create</span></h2>
+            <h2 className="text-4xl md:text-5xl font-instrument font-bold mb-4">What I <span className="text-blue-500 italic">Create</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto">End-to-end digital solutions tailored to your unique needs and goals.</p>
           </div>
 
@@ -210,7 +210,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold font-instrument mb-4">Featured <span className="italic text-[#6366f1]">Projects</span></h2>
+              <h2 className="text-4xl md:text-5xl font-bold font-instrument mb-4">Featured <span className="italic text-blue-600">Projects</span></h2>
               <p className="text-gray-400 max-w-xl">A selection of my recent work showcasing different technologies and solutions.</p>
             </div>
             <a href="/projects" className="mt-4 md:mt-0 text-indigo-400 hover:text-indigo-300 flex items-center gap-2 transition-colors">
@@ -277,7 +277,7 @@ export default function Home() {
             </div>
 
             <div className="reveal">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 font-instrument">Behind the <span className="italic text-[#6366f1]">Code</span></h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 font-instrument">Behind the <span className="italic text-blue-600">Code</span></h2>
               <p className="text-gray-400 text-lg mb-6 leading-relaxed">
                 I'm Osim Uka, a passionate full-stack developer with a love for creating digital experiences that make a difference. With 3+ years of experience, I've helped businesses transform their ideas into reality.
               </p>
@@ -298,7 +298,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <a href="#contact" className="btn-primary px-8 py-3 text-[#6366f1] italic font-instrument rounded-full font-medium inline-flex items-center gap-2">
+              <a href="#contact" className="btn-primary px-8 py-3 text-blue-600 italic font-instrument rounded-full font-medium inline-flex items-center gap-2">
                 Let's Work Together
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -313,7 +313,7 @@ export default function Home() {
       <section id="testimonials" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl md:text-5xl font-instrument  font-medium mb-4">Client <span className="italic text-[#6366f1] f">Stories</span></h2>
+            <h2 className="text-4xl md:text-5xl font-instrument  font-medium mb-4">Client <span className="italic text-blue-600 f">Stories</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Don't just take my word for it—here's what clients say about working with me.</p>
           </div>
 
@@ -347,7 +347,7 @@ export default function Home() {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-instrument">Tech <span className="text-[#6366f1] italic">Stack</span></h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-instrument">Tech <span className="text-blue-600 italic">Stack</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Modern tools and technologies I use to build exceptional digital experiences.</p>
           </div>
 

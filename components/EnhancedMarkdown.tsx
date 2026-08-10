@@ -11,7 +11,7 @@ interface EnhancedMarkdownProps {
 
 export default function EnhancedMarkdown({ content }: EnhancedMarkdownProps) {
   return (
-    <div className="prose prose-sm sm:prose md:prose-lg lg:prose-xl max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-a:text-[#fdbe21] prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 dark:prose-strong:text-white prose-ul:text-gray-700 dark:prose-ul:text-gray-300 prose-ol:text-gray-700 dark:prose-ol:text-gray-300 prose-li:marker:text-[#fdbe21] prose-blockquote:border-l-[#fdbe21] prose-blockquote:bg-gray-50 dark:prose-blockquote:bg-gray-800/50 prose-blockquote:p-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic">
+    <div className="prose prose-sm sm:prose md:prose-lg lg:prose-xl max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 dark:prose-strong:text-white prose-ul:text-gray-700 dark:prose-ul:text-gray-300 prose-ol:text-gray-700 dark:prose-ol:text-gray-300 prose-li:marker:text-blue-500 prose-blockquote:border-l-[#fdbe21] prose-blockquote:bg-gray-50 dark:prose-blockquote:bg-gray-800/50 prose-blockquote:p-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic">
       <ReactMarkdown
         components={{
           // Enhanced code blocks
@@ -46,7 +46,7 @@ export default function EnhancedMarkdown({ content }: EnhancedMarkdownProps) {
             
             if (isInternal) {
               return (
-                <Link href={href} className="text-[#fdbe21] hover:underline font-medium">
+                <Link href={href} className="text-blue-500 hover:underline font-medium">
                   {children}
                 </Link>
               )
@@ -57,7 +57,7 @@ export default function EnhancedMarkdown({ content }: EnhancedMarkdownProps) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#fdbe21] hover:underline font-medium inline-flex items-center gap-1"
+                className="text-blue-500 hover:underline font-medium inline-flex items-center gap-1"
               >
                 {children}
                 {!isEmail && <ExternalLink size={14} className="opacity-70" />}
@@ -130,7 +130,7 @@ export default function EnhancedMarkdown({ content }: EnhancedMarkdownProps) {
           li({ children }: any) {
             return (
               <li className="flex items-start gap-2">
-                <span className="text-[#fdbe21] mt-1.5 text-xs">•</span>
+                <span className="text-blue-500 mt-1.5 text-xs">•</span>
                 <span className="flex-1">{children}</span>
               </li>
             )
@@ -139,9 +139,9 @@ export default function EnhancedMarkdown({ content }: EnhancedMarkdownProps) {
           // Enhanced blockquotes
           blockquote({ children }: any) {
             return (
-              <blockquote className="border-l-4 border-[#fdbe21] bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 p-4 md:p-6 my-6 rounded-r-lg">
+              <blockquote className="border-l-4 border-blue-500 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 p-4 md:p-6 my-6 rounded-r-lg">
                 <div className="flex items-start gap-3">
-                  <Quote className="text-[#fdbe21] mt-1 flex-shrink-0" size={20} />
+                  <Quote className="text-blue-500 mt-1 flex-shrink-0" size={20} />
                   <div className="text-gray-700 dark:text-gray-300 italic">
                     {children}
                   </div>

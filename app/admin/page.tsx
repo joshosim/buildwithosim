@@ -285,7 +285,7 @@ export default function AdminPage() {
                 id="published"
                 checked={formData.published}
                 onChange={(e) => setFormData(prev => ({ ...prev, published: e.target.checked }))}
-                className="w-4 h-4 text-[#fdbe21] border-gray-300 rounded focus:ring-[#fdbe21]"
+                className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
               />
               <label htmlFor="published" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Publish immediately
@@ -298,7 +298,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-3 bg-[#fdbe21] hover:bg-[#ff9a00] text-white font-semibold rounded-lg transition-colors disabled:opacity-50"
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50"
             >
               {loading ? 'Creating...' : 'Create Blog Post'}
             </button>

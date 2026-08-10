@@ -44,7 +44,7 @@ export default function Shop() {
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-[#fdbe21]">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-blue-500">
             Digital Products
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-base md:text-xl max-w-2xl mx-auto">
@@ -57,7 +57,7 @@ export default function Shop() {
             <div key={product.id} className="flex flex-col h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
               <img src={product.image} alt={product.title} className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-6 flex-grow flex flex-col">
-                <span className="inline-block mb-4 px-3 py-1 bg-[#fdbe21] text-white text-xs font-semibold rounded-full w-fit">
+                <span className="inline-block mb-4 px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full w-fit">
                   {product.category}
                 </span>
                 <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
@@ -67,10 +67,10 @@ export default function Shop() {
                   {product.description}
                 </p>
                 <div className="flex justify-between items-center mt-auto">
-                  <span className="text-3xl font-bold text-[#fdbe21]">
+                  <span className="text-3xl font-bold text-blue-500">
                     {product.price}
                   </span>
-                  <button className="bg-[#fdbe21] hover:bg-[#ff9a00] text-white font-semibold px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                     {product.price === "Free" ? <Download size={16} /> : <ShoppingCart size={16} />}
                     {product.price === "Free" ? "Download" : "Buy Now"}
                   </button>
@@ -80,14 +80,14 @@ export default function Shop() {
           ))}
         </div>
 
-        <div className="mt-16 p-12 bg-[#fdbe21]/10 dark:bg-[#fdbe21]/5 rounded-2xl text-center border-2 border-dashed border-[#fdbe21]/30">
-          <h3 className="text-3xl font-bold mb-4 text-[#fdbe21]">
+        <div className="mt-16 p-12 bg-blue-600/10 dark:bg-blue-600/5 rounded-2xl text-center border-2 border-dashed border-blue-500/30">
+          <h3 className="text-3xl font-bold mb-4 text-blue-500">
             More Products Coming Soon
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             Website templates, coding guides, productivity tools, and more digital resources.
           </p>
-          <button className="border-2 border-[#fdbe21] text-[#fdbe21] font-semibold px-8 py-2 rounded-lg hover:bg-[#fdbe21]/10 transition-colors">
+          <button className="border-2 border-blue-500 text-blue-500 font-semibold px-8 py-2 rounded-lg hover:bg-blue-600/10 transition-colors">
             Get Notified
           </button>
         </div>

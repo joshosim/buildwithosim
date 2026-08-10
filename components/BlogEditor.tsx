@@ -65,13 +65,13 @@ export default function BlogEditor({ initialContent = '', onChange }: BlogEditor
         <div className="ml-auto flex gap-2">
           <button
             onClick={() => setPreview(false)}
-            className={`px-3 py-1 text-sm rounded ${!preview ? 'bg-[#fdbe21] text-white' : 'text-gray-600 dark:text-gray-400'}`}
+            className={`px-3 py-1 text-sm rounded ${!preview ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400'}`}
           >
             Edit
           </button>
           <button
             onClick={() => setPreview(true)}
-            className={`px-3 py-1 text-sm rounded ${preview ? 'bg-[#fdbe21] text-white' : 'text-gray-600 dark:text-gray-400'}`}
+            className={`px-3 py-1 text-sm rounded ${preview ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400'}`}
           >
             Preview
           </button>

@@ -40,7 +40,7 @@ export default function AdminAuth({ children }: AdminAuthProps) {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
       <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
-          <div className="mx-auto w-16 h-16 bg-[#fdbe21] rounded-full flex items-center justify-center mb-4">
+          <div className="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
             <Lock className="text-white" size={24} />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Admin Access</h2>
@@ -58,7 +58,7 @@ export default function AdminAuth({ children }: AdminAuthProps) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#fdbe21] focus:border-transparent"
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Enter admin password"
               required
             />
@@ -72,7 +72,7 @@ export default function AdminAuth({ children }: AdminAuthProps) {
 
           <button
             type="submit"
-            className="w-full bg-[#fdbe21] hover:bg-[#ff9a00] text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
           >
             Access Admin Panel
           </button>

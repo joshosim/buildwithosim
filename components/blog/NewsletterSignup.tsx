@@ -58,7 +58,7 @@ export default function NewsletterSignup() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-white text-[#fdbe21] font-semibold py-3 rounded hover:bg-gray-100 disabled:opacity-50"
+          className="w-full bg-white text-blue-500 font-semibold py-3 rounded hover:bg-gray-100 disabled:opacity-50"
         >
           {loading ? 'Subscribing...' : 'Subscribe Free'}
         </button>

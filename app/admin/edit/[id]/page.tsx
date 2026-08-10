@@ -134,7 +134,7 @@ export default function EditPost() {
       <AdminAuth>
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#fdbe21] mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
             <p className="text-gray-600 dark:text-gray-400">Loading post...</p>
           </div>
         </div>
@@ -342,7 +342,7 @@ export default function EditPost() {
                   id="published"
                   checked={formData.published}
                   onChange={(e) => setFormData(prev => ({ ...prev, published: e.target.checked }))}
-                  className="w-4 h-4 text-[#fdbe21] border-gray-300 rounded focus:ring-[#fdbe21]"
+                  className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
                 />
                 <label htmlFor="published" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Published
@@ -361,7 +361,7 @@ export default function EditPost() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-3 bg-[#fdbe21] hover:bg-[#ff9a00] text-white font-semibold rounded-lg transition-colors disabled:opacity-50"
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50"
               >
                 {loading ? 'Updating...' : 'Update Blog Post'}
               </button>

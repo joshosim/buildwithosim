@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Instrument_Serif } from 'next/font/google';
+import { Work_Sans, Instrument_Serif } from 'next/font/google';
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Providers from '@/components/Providers'
 import ScrollToTop from '@/components/ScrollToTop'
 
-const spaceGrotesk = Space_Grotesk({
+const workSans = Work_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700']
 })
@@ -30,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.className} ${instrumentSerif.variable}`}>
+      <body className={`${workSans.className} ${instrumentSerif.variable}`}>
         <Providers>
           <ScrollToTop />
           <Header />

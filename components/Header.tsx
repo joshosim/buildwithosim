@@ -59,17 +59,17 @@ export default function Header() {
         <div className='flex items-center gap-6'>
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/projects"
-              className={`${!pathname.startsWith("/projects") ? "text-gray-300" : "text-[#a855f7]"}
-               hover:text-[#a855f7] font-medium transition-colors`}>
+              className={`${!pathname.startsWith("/projects") ? "text-gray-300" : "text-blue-500"}
+               hover:text-blue-500 font-medium transition-colors`}>
               Projects
             </Link>
             <Link href="/blog"
-              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-[#a855f7]"}
-             hover:text-[#a855f7] font-medium transition-colors`}>
+              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-blue-500"}
+             hover:text-blue-500 font-medium transition-colors`}>
               Blog
             </Link>
             {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
-              <Link href="#about" className="text-gray-300 hover:text-[#a855f7] font-medium transition-colors">
+              <Link href="#about" className="text-gray-300 hover:text-blue-500 font-medium transition-colors">
                 About
               </Link>}
             {pathname.startsWith("/blog") || pathname.startsWith("/projects") || pathname.startsWith("/admin") ? <></> :
@@ -85,7 +85,7 @@ export default function Header() {
           <nav className="flex flex-col">
             <Link
               href="/"
-              className={`${!pathname.startsWith("/") ? "text-gray-300" : "text-[#a855f7]"}
+              className={`${!pathname.startsWith("/") ? "text-gray-300" : "text-blue-500"}
                 py-3 px-4 border-b border-gray-700 hover:bg-gray-700 transition-colors`}
               onClick={() => setIsOpen(false)}
             >
@@ -93,7 +93,7 @@ export default function Header() {
             </Link>
             <Link
               href="/projects"
-              className={`${!pathname.startsWith("/projects") ? "text-gray-300" : "text-[#a855f7]"}
+              className={`${!pathname.startsWith("/projects") ? "text-gray-300" : "text-blue-500"}
                 py-3 px-4 border-b border-gray-700 hover:bg-gray-700 transition-colors`}
               onClick={() => setIsOpen(false)}
             >
@@ -101,7 +101,7 @@ export default function Header() {
             </Link>
             <Link
               href="/blog"
-              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-[#a855f7]"}
+              className={`${!pathname.startsWith("/blog") ? "text-gray-300" : "text-blue-500"}
                 py-3 px-4 border-b border-gray-700 hover:bg-gray-700 transition-colors`}
               onClick={() => setIsOpen(false)}
             >
