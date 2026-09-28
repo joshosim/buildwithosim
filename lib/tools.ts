@@ -3,26 +3,54 @@
 import { MailtrapTransport } from "mailtrap";
 import nodemailer from "nodemailer";
 
-const transport = nodemailer.createTransport(
-  MailtrapTransport({
-    token: process.env.MAILTRAP_TOKEN!,
-  })
-);
+export interface SendResult {
+  success: boolean;
+  message?: string;
+}
 
 interface MessageProps {
   name: string;
   email: string;
   message: string;
 }
-export async function sendEmail({ email, message, name }: MessageProps) {
-  //for test purposes
-  console.log("Sending email with the following details:");
-  console.log("Name:", name);
-  console.log("Email:", email);
-  console.log("Message:", message);
+
+let transport: ReturnType<typeof nodemailer.createTransport> | null = null;
+
+/**
+ * Built on first use rather than at import time: `MailtrapTransport` throws
+ * when the token is missing, which would otherwise take down every module that
+ * imports this file — including the chat route.
+ */
+function getTransport() {
+  if (!transport) {
+    transport = nodemailer.createTransport(
+      MailtrapTransport({
+        token: process.env.MAILTRAP_TOKEN!,
+      })
+    );
+  }
+  return transport;
+}
+
+/** Visitor input is interpolated into the email HTML, so escape it. */
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export async function sendEmail({ email, message, name }: MessageProps): Promise<SendResult> {
+  if (!process.env.MAILTRAP_TOKEN || !process.env.EMAIL_FROM || !process.env.EMAIL_TO) {
+    const missing = "Email is not configured. Set MAILTRAP_TOKEN, EMAIL_FROM and EMAIL_TO.";
+    console.error(`❌ ${missing}`);
+    return { success: false, message: missing };
+  }
 
   try {
-    const info = await transport.sendMail({
+    const info = await getTransport().sendMail({
       from: {
         address: process.env.EMAIL_FROM!,
         name: "Osim AI Assistant",
@@ -33,11 +61,11 @@ export async function sendEmail({ email, message, name }: MessageProps) {
         <div style="font-family: Arial, sans-serif;">
           <h2>New Lead 🚀</h2>
 
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
 
           <p><strong>Project:</strong></p>
-          <p>${message}</p>
+          <p>${escapeHtml(message)}</p>
 
           <hr />
           <p style="font-size: 12px; color: gray;">
@@ -49,21 +77,22 @@ export async function sendEmail({ email, message, name }: MessageProps) {
 
     console.log("✅ Email sent:", info);
 
-    return {
-      success: true,
-    };
+    return { success: true };
   } catch (error) {
     console.error("❌ Email failed:", error);
 
     return {
       success: false,
-      message: "Failed to send email"
+      message: "Failed to send email",
     };
   }
-
 }
 
-export async function sendWhatsApp({ email, message, name }: MessageProps) {
+export async function sendWhatsApp({
+  email,
+  message,
+  name,
+}: MessageProps): Promise<{ url: string }> {
   const text = encodeURIComponent(
     `New Lead 🚀
 

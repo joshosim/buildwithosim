@@ -1,41 +1,51 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Instrument_Serif } from 'next/font/google';
+import { Work_Sans } from 'next/font/google'
 import './globals.css'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import Providers from '@/components/Providers'
+import SiteChrome from '@/components/SiteChrome'
 import ScrollToTop from '@/components/ScrollToTop'
 
-const spaceGrotesk = Space_Grotesk({
+const workSans = Work_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700']
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-work-sans',
 })
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-instrument-serif",
-});
-
-
 export const metadata: Metadata = {
-  title: 'BuildWithOsim',
-  description: 'Software Developer • Creative Designer • Digital Creator',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://buildwithosim.com'),
+  title: {
+    default: 'BuildWithOsim — Software Developer & Digital Creator',
+    template: '%s | BuildWithOsim',
+  },
+  description:
+    'Osim Uka builds high-performance websites, mobile apps and digital tools that help businesses grow and creators shine.',
+  openGraph: {
+    title: 'BuildWithOsim — Software Developer & Digital Creator',
+    description:
+      'High-performance websites, mobile apps and digital tools for businesses and creators.',
+    type: 'website',
+  },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+/**
+ * Applies the saved theme before first paint.
+ *
+ * This has to be a blocking inline script: anything running after hydration
+ * (including a React effect) is too late and produces a visible flash of the
+ * wrong theme. Dark is the default; light is opt-in.
+ */
+const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var d=s?s==='dark':true;document.documentElement.classList.toggle('dark',d)}catch(e){document.documentElement.classList.add('dark')}})();`
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${spaceGrotesk.className} ${instrumentSerif.variable}`}>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className={`${workSans.className} ${workSans.variable}`}>
         <Providers>
           <ScrollToTop />
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </Providers>
       </body>
     </html>

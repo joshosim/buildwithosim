@@ -1,8 +1,10 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 type Theme = 'light' | 'dark'
+
+export const THEME_STORAGE_KEY = 'theme'
 
 interface ThemeContextType {
   theme: Theme
@@ -12,30 +14,30 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light')
+  // The inline script in app/layout.tsx has already applied the correct class
+  // before first paint, so `.dark` is the correct server-rendered default.
+  const [theme, setTheme] = useState<Theme>('dark')
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme
-    if (savedTheme) {
-      setTheme(savedTheme)
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark')
-    }
+    setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light')
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('theme', theme)
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light')
-  }
+  // The DOM class is the source of truth; toggling writes to it directly rather
+  // than mirroring it in state, which is what previously caused the class and
+  // the state to disagree.
+  const toggleTheme = useCallback(() => {
+    const next: Theme = document.documentElement.classList.contains('dark') ? 'light' : 'dark'
+    document.documentElement.classList.toggle('dark', next === 'dark')
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, next)
+    } catch {
+      // Private mode / blocked storage — the toggle still works for this session.
+    }
+    setTheme(next)
+  }, [])
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
   )
 }
 

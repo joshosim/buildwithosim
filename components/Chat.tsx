@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: "user" | "assistant";
@@ -44,25 +45,25 @@ export default function Chat() {
         body: JSON.stringify({ messages: newMessages }),
       });
 
-      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json().catch(() => ({}));
 
-      const data = await res.json();
-
-      let assistantMessage: Message;
-
-      if (data.message) {
-        //custom response message from tool
-        assistantMessage = data.message;
-      } else {
-        // ✅ normal AI response
-        assistantMessage = data.choices[0].message;
+      if (!res.ok) {
+        throw new Error(data?.error ?? "The assistant is unavailable right now.");
       }
+
+      const assistantMessage: Message = data.message ?? data.choices[0].message;
 
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+        {
+          role: "assistant",
+          content:
+            error instanceof Error
+              ? error.message
+              : "Sorry, something went wrong. Please try again.",
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -77,24 +78,18 @@ export default function Chat() {
   };
 
   return (
-    <section className="w-full max-w-2xl mx-auto px-4 py-12">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2 font-instrument">Chat with <span className="italic text-[#6366f1] ">BuildWithOsim AI</span></h2>
-        <p className="text-gray-400">Ask me anything about my work and experience</p>
-      </div>
-
+    <section className="w-full max-w-2xl">
       {/* Chat Container */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="border border-line overflow-hidden">
         {/* Messages Area */}
         <div
           ref={scrollRef}
-          className="h-[400px] overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+          className="h-[400px] overflow-y-auto p-6 space-y-4 scrollbar-thin"
         >
           {messages.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center text-gray-500 space-y-3">
-              <Bot size={48} className="opacity-50" />
-              <p className="text-sm">Start a conversation...</p>
+            <div className="h-full flex flex-col items-center justify-center text-muted space-y-3">
+              <Bot size={48} className="opacity-20" />
+              <p className="text-sm font-light">Start a conversation...</p>
             </div>
           )}
 
@@ -106,26 +101,32 @@ export default function Chat() {
             >
               {/* Avatar */}
               <div
-                className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${m.role === "user"
-                  ? "bg-indigo-500"
-                  : "bg-gray-700"
+                className={`flex-shrink-0 w-8 h-8 flex items-center justify-center border border-line ${m.role === "user"
+                  ? "bg-fg text-bg"
+                  : "bg-surface text-muted"
                   }`}
               >
                 {m.role === "user" ? (
-                  <User size={16} className="text-white" />
+                  <User size={14} />
                 ) : (
-                  <Bot size={16} className="text-white" />
+                  <Bot size={14} />
                 )}
               </div>
 
               {/* Message Bubble */}
               <div
-                className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${m.role === "user"
-                  ? "bg-indigo-500 text-white rounded-br-md"
-                  : "bg-gray-800 text-gray-100 rounded-bl-md"
+                className={`max-w-[80%] px-4 py-2.5 text-sm leading-relaxed ${m.role === "user"
+                  ? "bg-fg text-bg"
+                  : "bg-surface text-fg border border-line"
                   }`}
               >
-                {m.content}
+                {m.role === "assistant" ? (
+                  <div className="chat-markdown">
+                    <ReactMarkdown>{m.content}</ReactMarkdown>
+                  </div>
+                ) : (
+                  m.content
+                )}
               </div>
             </div>
           ))}
@@ -133,18 +134,18 @@ export default function Chat() {
           {/* Loading Indicator */}
           {isLoading && (
             <div className="flex items-start gap-3 animate-in fade-in duration-300">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
-                <Bot size={16} className="text-white" />
+              <div className="flex-shrink-0 w-8 h-8 bg-surface border border-line flex items-center justify-center text-muted">
+                <Bot size={14} />
               </div>
-              <div className="bg-gray-800 rounded-2xl rounded-bl-md px-4 py-3">
-                <Loader2 size={16} className="animate-spin text-gray-400" />
+              <div className="bg-surface border border-line px-4 py-3">
+                <Loader2 size={16} className="animate-spin text-accent" />
               </div>
             </div>
           )}
         </div>
 
         {/* Input Area */}
-        <div className="border-t border-gray-800 p-4 bg-gray-900/50">
+        <div className="border-t border-line p-4 bg-surface">
           <div className="flex gap-3 items-end">
             <textarea
               value={input}
@@ -152,18 +153,18 @@ export default function Chat() {
               onKeyDown={handleKeyDown}
               placeholder="Type a message..."
               rows={1}
-              className="flex-1 bg-gray-800 text-white placeholder-gray-500 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all min-h-[44px] max-h-[120px]"
+              className="flex-1 bg-surface border border-line text-fg placeholder:text-muted px-4 py-3 text-sm resize-none focus:outline-none focus:border-line-strong transition-all min-h-[44px] max-h-[120px]"
               style={{ height: "auto" }}
             />
             <button
               onClick={send}
               disabled={!input.trim() || isLoading}
-              className="flex-shrink-0 bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-700 disabled:cursor-not-allowed text-white p-3 rounded-xl transition-all duration-200 hover:scale-105 active:scale-95"
+              className="flex-shrink-0 bg-fg hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed text-bg p-3 transition-colors duration-200"
             >
               <Send size={18} />
             </button>
           </div>
-          <p className="text-xs text-gray-600 mt-2 text-center">
+          <p className="text-[10px] text-muted mt-2 text-center uppercase tracking-widest">
             Press Enter to send, Shift + Enter for new line
           </p>
         </div>
