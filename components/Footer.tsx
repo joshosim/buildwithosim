@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import AvatarImage from '../public/logo.png'
+import AvatarImage from '../public/CEO.jpg'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -10,7 +10,7 @@ export default function Footer() {
     <footer className="border-t border-line py-10 px-6">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex items-center gap-3">
-          <Image src={AvatarImage} alt="Osim Uka" width={28} height={28} className="rounded-full border border-line" />
+          <Image src={AvatarImage} alt="Osim Uka" width={28} height={28} className="object-contain rounded-full border border-line" />
           <span className="font-black text-sm tracking-tight text-fg uppercase">BuildWithOsim</span>
         </div>
 

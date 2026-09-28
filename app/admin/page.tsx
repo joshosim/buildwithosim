@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Plus } from 'lucide-react'
-import { getAdminProjects, resolveImage, type Project } from '@/lib/projects'
+import { getAdminProjects, type Project } from '@/lib/projects.server'
+import { resolveImage } from '@/lib/projects'
 import ProjectRowActions from '@/components/admin/ProjectRowActions'
 
 // Admin data must never be cached.

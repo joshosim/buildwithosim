@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import ProjectForm from '@/components/admin/ProjectForm'
-import { getProject, type Project } from '@/lib/projects'
+import { getProject, type Project } from '@/lib/projects.server'
 
 export default async function EditProjectPage({
   params,

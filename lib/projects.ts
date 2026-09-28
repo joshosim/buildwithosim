@@ -1,5 +1,10 @@
+/**
+ * Shared types, utilities, and public (anon) project reads.
+ * Safe to import from both Server and Client components.
+ *
+ * For admin writes and cookie-bound reads, use lib/projects.server.ts instead.
+ */
 import { publicClient } from './supabase/public'
-import { createClient } from './supabase/server'
 
 export interface Project {
   id: string
@@ -56,87 +61,8 @@ export async function getProjects(): Promise<Project[]> {
  */
 export async function getFeaturedProjects(limit = 3): Promise<Project[]> {
   const projects = await getProjects()
-  const featured = projects.filter((project) => project.featured)
+  const featured = projects.filter((p) => p.featured)
   if (featured.length >= limit) return featured.slice(0, limit)
-
-  const rest = projects.filter((project) => !project.featured)
+  const rest = projects.filter((p) => !p.featured)
   return [...featured, ...rest].slice(0, limit)
-}
-
-// ---------------------------------------------------------------------------
-// Admin access — cookie-bound client, so RLS lets the signed-in admin see
-// unpublished rows too
-// ---------------------------------------------------------------------------
-
-/** Throws unless there is a signed-in user. RLS enforces this too; this just
- *  turns a silent no-op write into a clear error. */
-async function requireUser() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) fail('save changes', 'you are not signed in')
-  return supabase
-}
-
-export async function getAdminProjects(): Promise<Project[]> {
-  const supabase = await requireUser()
-  const { data, error } = await supabase
-    .from('projects')
-    .select(COLUMNS)
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: false })
-
-  if (error) fail('load projects', error.message)
-  return (data ?? []) as Project[]
-}
-
-export async function getProject(id: string): Promise<Project | null> {
-  const supabase = await requireUser()
-  const { data, error } = await supabase
-    .from('projects')
-    .select(COLUMNS)
-    .eq('id', id)
-    .maybeSingle()
-
-  if (error) fail('load project', error.message)
-  return (data as Project | null) ?? null
-}
-
-export async function createProject(input: ProjectInput): Promise<Project> {
-  const supabase = await requireUser()
-  const { data, error } = await supabase
-    .from('projects')
-    .insert(input)
-    .select(COLUMNS)
-    .single()
-
-  if (error) fail('create project', error.message)
-  return data as Project
-}
-
-export async function updateProject(id: string, input: ProjectInput): Promise<Project> {
-  const supabase = await requireUser()
-  const { data, error } = await supabase
-    .from('projects')
-    .update(input)
-    .eq('id', id)
-    .select(COLUMNS)
-    .single()
-
-  if (error) fail('update project', error.message)
-  return data as Project
-}
-
-export async function deleteProject(id: string): Promise<void> {
-  const supabase = await requireUser()
-  const { error } = await supabase.from('projects').delete().eq('id', id)
-  if (error) fail('delete project', error.message)
-}
-
-export async function setPublished(id: string, published: boolean): Promise<void> {
-  const supabase = await requireUser()
-  const { error } = await supabase.from('projects').update({ published }).eq('id', id)
-  if (error) fail('update project', error.message)
 }

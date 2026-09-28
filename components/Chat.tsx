@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import CEO from "../public/CEO.jpg";
+import Image from "next/image";
 
 interface Message {
   role: "user" | "assistant";
@@ -88,7 +90,7 @@ export default function Chat() {
         >
           {messages.length === 0 && (
             <div className="h-full flex flex-col items-center justify-center text-muted space-y-3">
-              <Bot size={48} className="opacity-20" />
+              <Image src={CEO} alt="CEO-IMAGE" height={48} width={48} className="opacity-20" />
               <p className="text-sm font-light">Start a conversation...</p>
             </div>
           )}
@@ -101,7 +103,7 @@ export default function Chat() {
             >
               {/* Avatar */}
               <div
-                className={`flex-shrink-0 w-8 h-8 flex items-center justify-center border border-line ${m.role === "user"
+                className={`flex-shrink-0 rounded-full w-8 h-8 flex items-center justify-center border border-line ${m.role === "user"
                   ? "bg-fg text-bg"
                   : "bg-surface text-muted"
                   }`}
@@ -109,7 +111,8 @@ export default function Chat() {
                 {m.role === "user" ? (
                   <User size={14} />
                 ) : (
-                  <Bot size={14} />
+                  <Image src={CEO} alt="CEO-IMAGE" height={14} width={14} className="rounded-full" />
+
                 )}
               </div>
 

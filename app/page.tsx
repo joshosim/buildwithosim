@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Avatar from '../public/avatar.png'
+import Avatar from '../public/CEO.jpg'
 import Chat from '@/components/Chat'
 import Reveal from '@/components/Reveal'
 import ProjectsTimeline from '@/components/ProjectsTimeline'
@@ -24,6 +24,11 @@ const services = [
     title: "Digital Tools",
     desc: "Custom software and internal tools that improve productivity and streamline workflows.",
     tags: ["Internal Tools", "Productivity Apps", "Custom Software"],
+  },
+  {
+    title: "AI & Automations",
+    desc: "End-to-end workflow automation and AI integrations that eliminate repetitive tasks, connect your tools, and run 24/7 without you.",
+    tags: ["n8n", "Make.com", "Zapier", "OpenAI", "Webhooks"],
   },
 ]
 
@@ -80,8 +85,8 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 border border-line reveal">
             {[
-              { value: "10+", label: "Projects Delivered" },
-              { value: "5+", label: "Happy Clients" },
+              { value: "20+", label: "Projects Delivered" },
+              { value: "10+", label: "Happy Clients" },
               { value: "3+", label: "Years Experience" },
               { value: "100%", label: "Satisfaction" },
             ].map((stat) => (
@@ -102,9 +107,9 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-black tracking-tight text-fg">Services</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-px border border-line reveal">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px border border-line reveal">
             {services.map((service, i) => (
-              <div key={i} className="p-10 border-b border-r border-line last:border-b-0 [&:nth-child(even)]:border-r-0 md:[&:nth-child(n+3)]:border-b-0">
+              <div key={i} className="p-10 border-b border-r border-line [&:nth-child(3n)]:border-r-0 last:border-b-0 md:last:col-span-full lg:last:col-span-1">
                 <div className="text-xs font-bold text-muted uppercase tracking-widest mb-4">0{i + 1}</div>
                 <h3 className="text-xl font-bold text-fg mb-3">{service.title}</h3>
                 <p className="text-muted text-sm leading-relaxed mb-6 font-light">{service.desc}</p>

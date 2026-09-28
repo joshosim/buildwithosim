@@ -9,7 +9,7 @@ import {
   setPublished,
   updateProject,
   type ProjectInput,
-} from '@/lib/projects'
+} from '@/lib/projects.server'
 
 export type ActionResult = { ok: true } | { ok: false; error: string }
 

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, Moon, Sun, X } from 'lucide-react'
-import AvatarImage from '../public/logo.png'
 import { useTheme } from '@/contexts/ThemeContext'
 
 const NAV_LINKS = [
@@ -17,6 +16,8 @@ const NAV_LINKS = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
+
+  const logoSrc = theme === 'dark' ? '/BUILDWITHOSIM_LOGO_DARK.svg' : '/BUILDWITHOSIM_LOGO_LIGHT.svg'
 
   const sendMessage = () => {
     const phoneNumber = '+2347066530998'
@@ -36,12 +37,15 @@ export default function Header() {
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          <Link href="/" className="flex items-center gap-2.5">
-            <Image src={AvatarImage} alt="Osim Uka" width={28} height={28} className="rounded-full border border-line" />
-            <span className="font-black text-sm tracking-tight text-fg uppercase">
-              <span className="md:hidden">BWO</span>
-              <span className="hidden md:block">BuildWithOsim</span>
-            </span>
+          <Link href="/">
+            <Image
+              src={logoSrc}
+              alt="BuildWithOsim"
+              width={140}
+              height={36}
+              className="h-45 w-auto object-contain -m-8 md:-m-10 lg:-m-12 "
+              priority
+            />
           </Link>
         </div>
 

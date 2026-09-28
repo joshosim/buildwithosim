@@ -14,12 +14,15 @@ const {
   resolveImage,
   getProjects,
   getFeaturedProjects,
+} = await import('@/lib/projects')
+
+const {
   getProject,
   createProject,
   updateProject,
   deleteProject,
   setPublished,
-} = await import('@/lib/projects')
+} = await import('@/lib/projects.server')
 
 const SIGNED_IN = { id: 'user-1', email: 'osim@example.com' }
 
