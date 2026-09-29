@@ -4,6 +4,7 @@ import './globals.css'
 import Providers from '@/components/Providers'
 import SiteChrome from '@/components/SiteChrome'
 import ScrollToTop from '@/components/ScrollToTop'
+import { Analytics } from "@vercel/analytics/next"
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <ScrollToTop />
           <SiteChrome>{children}</SiteChrome>
+          <Analytics />
         </Providers>
       </body>
     </html>
