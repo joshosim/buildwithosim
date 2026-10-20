@@ -1,3 +1,5 @@
+import type { StaticImageData } from "next/image"
+
 const ridesure = "/ridesure.png";
 const Move9ja = "/image.png";
 import Kilobyte from "../public/kilobyted.png"
@@ -6,19 +8,40 @@ import unikratives from "../public/unikratives.webp"
 import makeScholarship from "../public/make-scholarship.png"
 import brilliance from "../public/brilliance-integrated.png"
 import n8n from "../public/n8n-servicesignal.png"
+import micloth from "../public/micloth.png"
 
 interface DataProps {
   id: number,
   title: string,
   desc: string,
   link: string,
-  image: any,
+  image: string | StaticImageData,
   tools: string[],
   role: string,
   type: string
 }
 
 export const data: DataProps[] = [
+  {
+    id: 12,
+    title: "micloth",
+    desc: "A wardrobe companion that helps you catalog your clothes, decide what to wear, and keep track of laundry.",
+    link: "https://micloth.vercel.app",
+    image: micloth,
+    tools: ["Wardrobe Management", "Outfit Planning", "Laundry Tracking"],
+    role: "Personal Project",
+    type: "Wardrobe App"
+  },
+  {
+    id: 11,
+    title: "Her Way to Style",
+    desc: "A fashion and style blog covering clothing, trends, beauty, and everyday inspiration, with inclusive advice and representation for every woman.",
+    link: "https://www.herwaytostyle.com",
+    image: "/her-way-to-style.png",
+    tools: ["Next.js"],
+    role: "Personal Project",
+    type: "Fashion & Lifestyle Blog"
+  },
   {
     id: 10,
     title: "Brilliance Integrated",
