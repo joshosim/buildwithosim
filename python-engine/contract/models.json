@@ -1,0 +1,42 @@
+{
+  "models": [
+    {
+      "id": "htdemucs_vocals",
+      "label": "Vocals + accompaniment",
+      "description": "A vocal stem and an accompaniment stem. It runs the same network as the 4-stem option and mixes the result afterwards, so it is not faster.",
+      "stems": ["vocals", "accompaniment"],
+      "native_stems": ["drums", "bass", "other", "vocals"],
+      "returns_instrument_stems": false,
+      "experimental": false,
+      "relative_speed": "baseline"
+    },
+    {
+      "id": "htdemucs",
+      "label": "4 stems",
+      "description": "Vocals, drums, bass and other, plus an accompaniment mix.",
+      "stems": ["vocals", "accompaniment", "drums", "bass", "other"],
+      "native_stems": ["drums", "bass", "other", "vocals"],
+      "returns_instrument_stems": true,
+      "experimental": false,
+      "relative_speed": "baseline"
+    },
+    {
+      "id": "htdemucs_6s",
+      "label": "6 stems, experimental",
+      "description": "Adds guitar and piano to the 4-stem set.",
+      "stems": ["vocals", "accompaniment", "drums", "bass", "other", "guitar", "piano"],
+      "native_stems": ["drums", "bass", "other", "vocals", "guitar", "piano"],
+      "returns_instrument_stems": true,
+      "experimental": true,
+      "relative_speed": "baseline"
+    }
+  ],
+  "default_model": "htdemucs",
+  "limits": {
+    "max_upload_mb": 150,
+    "max_duration_seconds": 600,
+    "allowed_extensions": [".mp3", ".wav", ".flac", ".ogg", ".oga", ".opus", ".m4a", ".aac", ".aif", ".aiff"],
+    "output_formats": ["wav", "mp3"],
+    "job_ttl_seconds": 3600
+  }
+}

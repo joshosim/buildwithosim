@@ -1,0 +1,17 @@
+{
+  "job_id": "3f2b8c1d9e4a4b6f8a7c5d2e1f0a9b8c",
+  "status": "failed",
+  "stage": "separating",
+  "progress": null,
+  "model": "htdemucs",
+  "format": "wav",
+  "filename": "my song.mp3",
+  "created_at": "2026-11-03T22:14:00Z",
+  "expires_at": "2026-11-03T23:16:30Z",
+  "error": {
+    "code": "out_of_memory",
+    "message": "The engine ran out of memory on this track. Try a shorter file, or a smaller model."
+  },
+  "stems": null,
+  "archive": null
+}

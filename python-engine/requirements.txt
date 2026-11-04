@@ -1,0 +1,15 @@
+# Web API. Bounded to the major versions this engine was written and tested against.
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+python-multipart>=0.0.9,<1
+
+# Separation model. 4.1.0 is the latest release; upstream is archived (read-only since
+# January 2025), so there will be no newer version and an exact pin is appropriate.
+demucs==4.1.0
+
+# demucs requires torch>=2.1 but does not install a build for your hardware.
+# For a CPU-only machine, install the smaller CPU wheel first (see README):
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# For NVIDIA GPUs, use the command for your CUDA version from https://pytorch.org/get-started/locally/
+# pip will otherwise pull the default PyTorch build for your platform.
+torch>=2.1,<3
