@@ -122,40 +122,6 @@ function uploadFile(
 }
 
 /* -------------------------------------------------------------------------- */
-/* Decorative waveform                                                        */
-/* -------------------------------------------------------------------------- */
-
-const BAR_COUNT = 48
-
-/**
- * Purely decorative. It animates faster while a job is running, but it is NOT
- * driven by the audio and does not represent model progress.
- */
-function WaveformBackdrop({ active }: { active: boolean }) {
-    return (
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-40 overflow-hidden [perspective:600px]">
-            <div className="absolute inset-x-4 bottom-0 flex h-full items-end justify-between gap-[3px] [transform:rotateX(55deg)] [transform-origin:bottom]">
-                {Array.from({ length: BAR_COUNT }, (_, i) => {
-                    const base = 25 + ((Math.sin(i * 0.9) + Math.sin(i * 0.33 + 1)) * 0.25 + 0.5) * 60
-                    return (
-                        <span
-                            key={i}
-                            className="stem-bar w-full rounded-t-sm bg-gradient-to-t from-indigo-600/50 to-fuchsia-400/60"
-                            style={{
-                                height: `${base}%`,
-                                animationDuration: `${(active ? 0.7 : 2.4) + (i % 7) * 0.13}s`,
-                                animationDelay: `${(i % 11) * -0.2}s`,
-                            }}
-                        />
-                    )
-                })}
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-zinc-900" />
-        </div>
-    )
-}
-
-/* -------------------------------------------------------------------------- */
 /* One stem: player, volume, mute, download                                   */
 /* -------------------------------------------------------------------------- */
 
@@ -400,28 +366,41 @@ export default function AudioSeparator() {
     return (
         <section
             aria-labelledby="separator-title"
-            className="relative mx-auto my-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 p-5 text-white shadow-2xl shadow-indigo-950/40 sm:p-8"
+            className="relative mx-auto my-4 w-full max-w-6xl text-white sm:my-8"
         >
             {/* keyframes live here so the component is a single paste-in file */}
             <style>{`
-                @keyframes stem-bar { 0%,100% { transform: scaleY(.35) } 50% { transform: scaleY(1) } }
-                .stem-bar { transform-origin: bottom; animation-name: stem-bar; animation-iteration-count: infinite; animation-timing-function: ease-in-out }
                 @keyframes stem-slide { from { transform: translateX(-100%) } to { transform: translateX(350%) } }
-                @media (prefers-reduced-motion: reduce) { .stem-bar, .stem-slide { animation: none !important } }
+                @media (prefers-reduced-motion: reduce) { .stem-slide { animation: none !important } }
             `}</style>
 
-            <WaveformBackdrop active={busy} />
+            <div className="mb-9 sm:mb-12">
+                <div className="relative z-10">
+                    <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                        Osim Audio Lab <span className="px-1 text-zinc-600">/</span> Stem Studio
+                    </p>
+                    <h2 id="separator-title" className="max-w-3xl text-4xl font-semibold leading-[1.05] tracking-[-0.045em] text-white sm:text-6xl">
+                        Separate the parts.
+                        <br className="hidden sm:block" /> Keep the music.
+                    </h2>
+                    <p className="mt-5 max-w-xl text-sm leading-7 text-zinc-400 sm:text-base">
+                        Extract vocals and instruments from a track, then preview and download each stem.
+                    </p>
+                </div>
+            </div>
 
-            <div className="relative">
-                <h2 id="separator-title" className="text-2xl font-bold tracking-tight">
-                    Stem Separator
-                </h2>
-                <p className="mt-1 text-sm text-zinc-400">
-                    Upload a track to split the vocals from the accompaniment, and (with some models) into drums, bass and more.
-                </p>
+            <div className="relative overflow-hidden rounded-2xl border border-white/[0.12] bg-[#111113] p-5 shadow-[0_24px_60px_-40px_rgba(0,0,0,0.9)] sm:p-8 lg:p-10">
+                <div className="relative z-10">
+                    <div className="mb-6 flex items-center justify-between gap-4 border-b border-white/[0.09] pb-5">
+                        <div>
+                            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400">New session</p>
+                            <p className="mt-1 text-sm text-zinc-300">Start with an audio file</p>
+                        </div>
+                        <span className="font-mono text-[10px] tracking-wider text-zinc-500">AUDIO STEMS</span>
+                    </div>
 
                 {catalogError && (
-                    <p role="alert" className="mt-5 rounded-lg border border-red-500/40 bg-red-950/40 p-3 text-sm text-red-200">
+                    <p role="alert" className="mt-5 rounded-xl border border-rose-300/20 bg-rose-500/[0.09] p-4 text-sm leading-6 text-rose-100 shadow-inner shadow-rose-950/20">
                         {catalogError}
                     </p>
                 )}
@@ -440,7 +419,7 @@ export default function AudioSeparator() {
                                 setDragging(false)
                                 if (!busy) chooseFile(e.dataTransfer.files?.[0] ?? null)
                             }}
-                            className={`mt-6 flex cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed px-4 py-8 text-center transition-colors focus-within:ring-2 focus-within:ring-indigo-400 ${dragging ? 'border-indigo-400 bg-indigo-500/10' : 'border-zinc-700 bg-zinc-800/40 hover:border-zinc-500'
+                            className={`mt-6 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border px-4 py-10 text-center transition-colors duration-200 focus-within:ring-2 focus-within:ring-violet-400/70 ${dragging ? 'border-violet-400/70 bg-violet-400/[0.06]' : 'border-dashed border-white/[0.16] bg-black/20 hover:border-white/30 hover:bg-white/[0.02]'
                                 } ${busy ? 'pointer-events-none opacity-60' : ''}`}
                         >
                             <input
@@ -450,11 +429,15 @@ export default function AudioSeparator() {
                                 onChange={(e) => chooseFile(e.target.files?.[0] ?? null)}
                                 className="sr-only"
                             />
-                            <span className="text-sm font-medium text-zinc-100">
-                                {file ? 'Choose a different file' : 'Drop an audio file here, or click to browse'}
+                            <span className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-2xl text-zinc-200">
+                                {file ? '♫' : '↑'}
                             </span>
+                            <span className="text-sm font-semibold text-zinc-100">
+                                {file ? 'Choose a different file' : 'Drop your track here'}
+                            </span>
+                            {!file && <span className="text-xs text-zinc-400">or <span className="text-zinc-200 underline underline-offset-4">browse files</span> to get started</span>}
                             {catalog && (
-                                <span className="text-xs text-zinc-400">
+                                <span className="mt-2 text-[10px] uppercase tracking-[0.14em] text-zinc-500">
                                     {catalog.limits.allowed_extensions.map((e) => e.slice(1).toUpperCase()).join(' · ')} · up to{' '}
                                     {catalog.limits.max_upload_mb} MB · up to {formatClock(catalog.limits.max_duration_seconds)} long
                                 </span>
@@ -468,17 +451,17 @@ export default function AudioSeparator() {
                         )}
 
                         {file && (
-                            <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-lg bg-zinc-800/60 p-3 text-sm">
-                                <dt className="text-zinc-400">File</dt>
-                                <dd className="truncate text-zinc-100" title={file.name}>
+                            <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-xl border border-white/10 bg-black/20 p-4 text-sm">
+                                <dt className="text-slate-400">File</dt>
+                                <dd className="truncate text-slate-100" title={file.name}>
                                     {file.name}
                                 </dd>
-                                <dt className="text-zinc-400">Size</dt>
-                                <dd className="text-zinc-100">{formatBytes(file.size)}</dd>
+                                <dt className="text-slate-400">Size</dt>
+                                <dd className="text-slate-100">{formatBytes(file.size)}</dd>
                                 {duration !== null && (
                                     <>
-                                        <dt className="text-zinc-400">Length</dt>
-                                        <dd className="text-zinc-100">{formatClock(duration)}</dd>
+                                        <dt className="text-slate-400">Length</dt>
+                                        <dd className="text-slate-100">{formatClock(duration)}</dd>
                                     </>
                                 )}
                             </dl>
@@ -488,12 +471,12 @@ export default function AudioSeparator() {
                         {catalog && (
                             <div className="mt-5 grid gap-4 sm:grid-cols-[1fr_auto]">
                                 <label className="block text-sm">
-                                    <span className="mb-1 block text-zinc-300">Model</span>
+                                    <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Model</span>
                                     <select
                                         value={modelId}
                                         onChange={(e) => setModelId(e.target.value)}
                                         disabled={busy}
-                                        className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                        className="w-full rounded-xl border border-white/10 bg-[#11121b] px-4 py-3 text-sm text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:ring-2 focus:ring-violet-400/70"
                                     >
                                         {catalog.models.map((m) => (
                                             <option key={m.id} value={m.id}>
@@ -504,12 +487,12 @@ export default function AudioSeparator() {
                                     </select>
                                 </label>
                                 <label className="block text-sm">
-                                    <span className="mb-1 block text-zinc-300">Format</span>
+                                    <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Format</span>
                                     <select
                                         value={format}
                                         onChange={(e) => setFormat(e.target.value)}
                                         disabled={busy}
-                                        className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:w-28"
+                                        className="w-full rounded-xl border border-white/10 bg-[#11121b] px-4 py-3 text-sm text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:ring-2 focus:ring-violet-400/70 sm:w-32"
                                     >
                                         {catalog.limits.output_formats.map((f) => (
                                             <option key={f} value={f}>
@@ -522,9 +505,9 @@ export default function AudioSeparator() {
                         )}
 
                         {model && (
-                            <p className="mt-3 text-xs leading-relaxed text-zinc-400">
+                            <p className="mt-4 rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 text-xs leading-relaxed text-slate-400">
                                 {model.description}{' '}
-                                <span className="text-zinc-300">Output: {model.stems.join(', ')}.</span>
+                                <span className="text-slate-200">Output: {model.stems.join(', ')}.</span>
                             </p>
                         )}
 
@@ -532,7 +515,7 @@ export default function AudioSeparator() {
                             type="button"
                             onClick={handleSeparate}
                             disabled={!file || !catalog || busy}
-                            className="mt-5 w-full rounded-md bg-indigo-600 px-4 py-2.5 font-medium transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-400"
+                            className="mt-5 w-full rounded-lg bg-violet-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-violet-500 disabled:cursor-not-allowed disabled:bg-white/[0.07] disabled:text-zinc-500"
                         >
                             {busy ? 'Working…' : 'Separate'}
                         </button>
@@ -541,7 +524,7 @@ export default function AudioSeparator() {
 
                 {/* Status ---------------------------------------------------- */}
                 {busy && (
-                    <div className="mt-5" role="status" aria-live="polite">
+                    <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-5" role="status" aria-live="polite">
                         {phase === 'uploading' ? (
                             <ProgressBar label="Uploading" fraction={uploadFraction} />
                         ) : (
@@ -616,11 +599,12 @@ export default function AudioSeparator() {
                 )}
 
                 {/* Honest model note ---------------------------------------- */}
-                <p className="mt-6 border-t border-zinc-800 pt-4 text-xs leading-relaxed text-zinc-500">
+                <p className="mt-8 border-t border-white/[0.09] pt-5 text-xs leading-relaxed text-slate-400/75">
                     Quality and available stems depend on the model. The standard models split a mix into vocals, drums, bass and
                     “other”; “other” is a catch-all (guitars, keys, synths…), not a single instrument. Accompaniment is every
                     non-vocal stem mixed back together. Expect some bleed between stems.
                 </p>
+                </div>
             </div>
         </section>
     )
