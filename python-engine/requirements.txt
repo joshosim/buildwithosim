@@ -7,6 +7,9 @@ python-multipart>=0.0.9,<1
 # January 2025), so there will be no newer version and an exact pin is appropriate.
 demucs==4.1.0
 
+# Demucs/PyTorch uses NumPy for audio tensor conversion.
+numpy>=1.26,<3
+
 # demucs requires torch>=2.1 but does not install a build for your hardware.
 # For a CPU-only machine, install the smaller CPU wheel first (see README):
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu

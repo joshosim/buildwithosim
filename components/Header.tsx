@@ -3,12 +3,14 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { Menu, Moon, Sun, X } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
 
 const NAV_LINKS = [
   { href: '#services', label: 'Services' },
   { href: '#projects', label: 'Projects' },
+  { href: '/music', label: 'Music' },
   { href: '#about', label: 'About' },
   { href: '#testimonials', label: 'Testimonials' },
 ]
@@ -16,6 +18,9 @@ const NAV_LINKS = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
+  const pathname = usePathname()
+  const sectionHref = (href: string) =>
+    href.startsWith('#') && pathname !== '/' ? `/${href}` : href
 
   const logoSrc = theme === 'dark' ? '/BUILDWITHOSIM_LOGO_DARK.svg' : '/BUILDWITHOSIM_LOGO_LIGHT.svg'
 
@@ -43,22 +48,30 @@ export default function Header() {
               alt="BuildWithOsim"
               width={140}
               height={36}
-              className="h-45 w-auto object-contain -m-8 md:-m-10 lg:-m-12 "
+              className="h-9 w-auto object-contain"
               priority
             />
           </Link>
         </div>
 
         <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-xs font-semibold uppercase tracking-widest text-muted hover:text-fg transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const href = sectionHref(link.href)
+            const isMusicPage = link.href === '/music' && pathname === '/music'
+
+            return (
+              <Link
+                key={link.href}
+                href={href}
+                aria-current={isMusicPage ? 'page' : undefined}
+                className={`text-xs font-semibold uppercase tracking-widest transition-colors ${
+                  isMusicPage ? 'text-fg' : 'text-muted hover:text-fg'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -73,7 +86,7 @@ export default function Header() {
             onClick={sendMessage}
             className="btn-primary hidden md:block px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-sm"
           >
-            Let's Talk
+            Let&apos;s Talk
           </button>
         </div>
       </div>
@@ -82,21 +95,29 @@ export default function Header() {
       {isOpen && (
         <div className="border-t border-line bg-bg md:hidden">
           <nav className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-1">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="py-3 text-xs font-semibold uppercase tracking-widest text-muted hover:text-fg transition-colors border-b border-line last:border-b-0"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const href = sectionHref(link.href)
+              const isMusicPage = link.href === '/music' && pathname === '/music'
+
+              return (
+                <Link
+                  key={link.href}
+                  href={href}
+                  aria-current={isMusicPage ? 'page' : undefined}
+                  className={`py-3 text-xs font-semibold uppercase tracking-widest transition-colors border-b border-line last:border-b-0 ${
+                    isMusicPage ? 'text-fg' : 'text-muted hover:text-fg'
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
             <button
               onClick={() => { setIsOpen(false); sendMessage() }}
               className="btn-primary mt-4 py-3 text-xs font-bold uppercase tracking-widest rounded-sm"
             >
-              Let's Talk
+              Let&apos;s Talk
             </button>
           </nav>
         </div>
