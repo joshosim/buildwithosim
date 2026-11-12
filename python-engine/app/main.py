@@ -19,7 +19,12 @@ All errors have the same shape: ``{"error": {"code": "...", "message": "..."}}``
 from __future__ import annotations
 
 import asyncio
+import importlib.util
+import io
 import logging
+import os
+import tempfile
+import wave
 from collections.abc import AsyncIterator
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager
@@ -30,6 +35,7 @@ from fastapi import Depends, FastAPI, File, Form, Request, Response, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
+from starlette.background import BackgroundTask
 from starlette.concurrency import run_in_threadpool
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -84,6 +90,10 @@ def no_store(response: Response) -> None:
     response.headers["Cache-Control"] = "no-store"
 
 
+def _tts_available() -> bool:
+    return importlib.util.find_spec("chatterbox") is not None and importlib.util.find_spec("torchaudio") is not None
+
+
 def create_app(settings: Settings | None = None, separator: Separator | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
     store = JobStore(settings.work_dir, settings.job_ttl_seconds)
@@ -126,6 +136,18 @@ def create_app(settings: Settings | None = None, separator: Separator | None = N
         path="/jobs",
         max_bytes=settings.max_upload_bytes + UPLOAD_OVERHEAD_BYTES,
         message=f"That file is larger than the {settings.max_upload_mb} MB limit.",
+    )
+    app.add_middleware(
+        UploadSizeLimitMiddleware,
+        path="/api/documents/extract",
+        max_bytes=26 * 1024 * 1024,
+        message="PDFs must be smaller than 25 MB.",
+    )
+    app.add_middleware(
+        UploadSizeLimitMiddleware,
+        path="/api/voice/reference",
+        max_bytes=11 * 1024 * 1024,
+        message="Voice samples must be smaller than 10 MB.",
     )
     app.add_middleware(
         CORSMiddleware,
@@ -222,6 +244,74 @@ def create_app(settings: Settings | None = None, separator: Separator | None = N
             demucs=demucs_installed(),
             active_jobs=store.unfinished_count(),
         )
+
+    @app.get("/api/reader/health", dependencies=[Depends(no_store)])
+    def reader_health() -> dict[str, str]:
+        return {"status": "ok", "tts": "available" if _tts_available() else "install chatterbox-tts and torchaudio"}
+
+    @app.post("/api/documents/extract", dependencies=[Depends(no_store)])
+    async def extract_document(file: UploadFile = File(...)) -> dict[str, object]:
+        from pypdf import PdfReader
+        from pypdf.errors import PdfReadError
+
+        if not file.filename or not file.filename.lower().endswith(".pdf"):
+            raise EngineHTTPError(415, "unsupported_type", "Upload a PDF document.")
+        contents = await file.read(25 * 1024 * 1024 + 1)
+        if len(contents) > 25 * 1024 * 1024:
+            raise EngineHTTPError(413, "file_too_large", "PDFs must be smaller than 25 MB.")
+        if not contents:
+            raise EngineHTTPError(400, "empty_file", "That PDF is empty.")
+        try:
+            reader = PdfReader(io.BytesIO(contents), strict=False)
+            page_texts = [(page.extract_text() or "").strip() for page in reader.pages]
+        except (PdfReadError, ValueError) as exc:
+            raise EngineHTTPError(422, "invalid_pdf", "This PDF could not be opened.") from exc
+        if not any(page_texts):
+            raise EngineHTTPError(422, "no_text", "No selectable text was found. This may be a scanned PDF; OCR is not configured.")
+        return {"filename": Path(file.filename).name, "pages": len(page_texts), "page_texts": page_texts, "text": "\n\n".join(f"[Page {i + 1}]\n{text}" for i, text in enumerate(page_texts) if text)}
+
+    @app.post("/api/voice/reference", dependencies=[Depends(no_store)])
+    async def upload_voice_reference(file: UploadFile = File(...)) -> dict[str, str]:
+        if not (file.filename or "").lower().endswith(".wav"):
+            raise EngineHTTPError(415, "unsupported_type", "Upload a WAV voice recording.")
+        data = await file.read(10 * 1024 * 1024 + 1)
+        if len(data) > 10 * 1024 * 1024:
+            raise EngineHTTPError(413, "file_too_large", "Voice samples must be smaller than 10 MB.")
+        try:
+            with wave.open(io.BytesIO(data), "rb") as wav:
+                if wav.getnframes() < wav.getframerate() or wav.getframerate() < 16000:
+                    raise ValueError("too short or low sample rate")
+        except (wave.Error, ValueError) as exc:
+            raise EngineHTTPError(422, "invalid_audio", "Upload a valid WAV recording at least one second long (16 kHz or higher).") from exc
+        settings.reader_data_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+        target = settings.reader_data_dir / "voice-reference.wav"
+        target.write_bytes(data)
+        target.chmod(0o600)
+        return {"status": "saved", "message": "Voice reference saved privately on this engine."}
+
+    @app.post("/api/speech/generate", dependencies=[Depends(no_store)])
+    async def generate_speech(payload: dict[str, object]) -> FileResponse:
+        text = payload.get("text")
+        if not isinstance(text, str) or not text.strip():
+            raise EngineHTTPError(422, "invalid_text", "Provide text to read.")
+        if len(text) > 12000:
+            raise EngineHTTPError(413, "text_too_long", "Each speech segment must be 12,000 characters or fewer.")
+        reference = settings.reader_data_dir / "voice-reference.wav"
+        if not reference.is_file():
+            raise EngineHTTPError(409, "voice_missing", "Upload a voice reference before generating speech.")
+        try:
+            from .tts_service import generate_wav
+            fd, output = tempfile.mkstemp(suffix=".wav")
+            os.close(fd)
+            await run_in_threadpool(generate_wav, text.strip(), str(reference), output)
+        except ImportError as exc:
+            raise EngineHTTPError(503, "tts_unavailable", "Install the optional Chatterbox TTS dependencies to enable speech.") from exc
+        except Exception as exc:
+            if "output" in locals():
+                Path(output).unlink(missing_ok=True)
+            logger.exception("speech generation failed")
+            raise EngineHTTPError(503, "tts_failed", "Speech generation failed. Check model installation and available memory.") from exc
+        return FileResponse(output, media_type="audio/wav", filename="reader-segment.wav", background=BackgroundTask(Path(output).unlink, missing_ok=True), headers={"Cache-Control": "no-store"})
 
     @app.get("/models", response_model=ModelsOut, dependencies=[Depends(no_store)])
     def list_models() -> ModelsOut:

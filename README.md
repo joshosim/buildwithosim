@@ -51,6 +51,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## BUILDWITHOSIM Reader
+
+Run the Python API from `python-engine/` with a Python version supported by PyTorch:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e '.[reader-tts]'  # optional: enables Chatterbox reference-voice synthesis
+uvicorn app.main:app --reload --port 8000
+```
+
+Set `STEM_CORS_ORIGINS` to the frontend origin and optionally set `READER_DATA_DIR` to a private writable directory. Voice recordings are stored there with owner-only file permissions and are not exposed by a static route. The frontend uses `NEXT_PUBLIC_READER_API_URL` when set, and defaults to `http://localhost:8000` for local development. Chatterbox uses the uploaded WAV as a zero-shot reference; it does not train a new voice model. Without the optional TTS dependencies, PDF extraction and uploads remain available but speech generation returns an unavailable error. Scanned PDFs are not OCR processed.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

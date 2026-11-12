@@ -70,6 +70,7 @@ class Settings:
     model_cache_size: int
     enabled_models: tuple[str, ...]
     default_model: str
+    reader_data_dir: Path
     allowed_extensions: tuple[str, ...] = ALLOWED_EXTENSIONS
 
     @property
@@ -115,4 +116,5 @@ class Settings:
             model_cache_size=_read_int(env, "STEM_MODEL_CACHE_SIZE", 1, minimum=1, maximum=4),
             enabled_models=enabled,
             default_model=default_model,
+            reader_data_dir=Path(env.get("READER_DATA_DIR") or Path.home() / ".buildwithosim-reader").expanduser(),
         )
