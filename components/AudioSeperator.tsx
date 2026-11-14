@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { fetchJobStatus } from '@/lib/stem-polling'
 
 /* -------------------------------------------------------------------------- */
 /* Config + API types (mirror the Python engine's contract)                   */
@@ -221,6 +222,7 @@ export default function AudioSeparator() {
     const [uploadFraction, setUploadFraction] = useState(0)
     const [job, setJob] = useState<Job | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const [connectionRetry, setConnectionRetry] = useState(0)
 
     const abortRef = useRef<AbortController | null>(null)
     const jobIdRef = useRef<string | null>(null)
@@ -310,7 +312,8 @@ export default function AudioSeparator() {
 
     const poll = async (jobId: string, signal: AbortSignal) => {
         while (!signal.aborted) {
-            const res = await fetch(`${API_BASE}/jobs/${jobId}`, { signal, cache: 'no-store' })
+            const res = await fetchJobStatus(`${API_BASE}/jobs/${jobId}`, signal, setConnectionRetry)
+            setConnectionRetry(0)
             if (!res.ok) throw new ApiError(await readError(res))
             const current = (await res.json()) as Job
             setJob(current)
@@ -332,6 +335,7 @@ export default function AudioSeparator() {
 
         setError(null)
         setJob(null)
+        setConnectionRetry(0)
         setUploadFraction(0)
         setPhase('uploading')
 
@@ -532,7 +536,9 @@ export default function AudioSeparator() {
                                 label={STAGE_LABELS[job?.stage ?? 'queued'] ?? 'Working'}
                                 fraction={progress}
                                 note={
-                                    progress === null
+                                    connectionRetry > 0
+                                        ? `Connection interrupted. Reconnecting to the engine (${connectionRetry}/6)…`
+                                        : progress === null
                                         ? 'This step has no measurable progress. Long tracks can take several minutes.'
                                         : 'Estimate based on the model’s processed segments; it can pause between segments.'
                                 }
