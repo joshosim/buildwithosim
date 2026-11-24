@@ -75,10 +75,10 @@ export const data: DataProps[] = [
   {
     id: 7,
     title: "Recall",
-    desc: "A mobile app that helps users find and book rides easily, with real-time tracking and secure payments.",
+    desc: "A customer follow-up CRM for small business owners, so no enquiry or repeat customer goes cold.",
     link: "",
     image: Move9ja,
-    tools: ["Nextjs", "PWA"],
+    tools: ["Next.js", "Supabase"],
     role: "Solo Project (06/2026)",
     type: "Customer Reminder"
   },

@@ -7,33 +7,33 @@
    --------------------------------------------------------------------------- */
 
 :root {
-  --bg: #f8f8f6;
-  --fg: #111110;
-  --muted: #6b6b68;
-  --surface: rgba(0, 0, 0, 0.04);
-  --surface-hover: rgba(0, 0, 0, 0.07);
-  --line: rgba(0, 0, 0, 0.1);
-  --line-strong: rgba(0, 0, 0, 0.2);
-  --accent: #1a1a18;
-  --accent-hover: #333330;
+  --bg: #fafaf7;
+  --fg: #0e1512;
+  --muted: #4f5b54;
+  --surface: #ffffff;
+  --surface-hover: #f2f4f0;
+  --line: rgba(14, 21, 18, 0.12);
+  --line-strong: rgba(14, 21, 18, 0.28);
+  --accent: #0a6b49;
+  --accent-hover: #085a3d;
   --accent-contrast: #ffffff;
-  --accent-soft: rgba(26, 26, 24, 0.08);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --accent-soft: rgba(10, 107, 73, 0.1);
+  --shadow: 0 8px 32px rgba(14, 21, 18, 0.08);
 }
 
 .dark {
-  --bg: #0c0c0b;
-  --fg: #f0f0ee;
-  --muted: #888884;
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-hover: rgba(255, 255, 255, 0.07);
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.2);
-  --accent: #e8e8e4;
-  --accent-hover: #ffffff;
-  --accent-contrast: #0c0c0b;
-  --accent-soft: rgba(232, 232, 228, 0.08);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --bg: #0a0f0d;
+  --fg: #eef2ef;
+  --muted: #a3afa8;
+  --surface: #111815;
+  --surface-hover: #17201c;
+  --line: rgba(238, 242, 239, 0.12);
+  --line-strong: rgba(238, 242, 239, 0.28);
+  --accent: #4ade9b;
+  --accent-hover: #7aeab6;
+  --accent-contrast: #04130c;
+  --accent-soft: rgba(74, 222, 155, 0.12);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 @theme inline {
@@ -49,7 +49,7 @@
   --color-accent-contrast: var(--accent-contrast);
   --color-background: var(--bg);
   --color-foreground: var(--fg);
-  --font-sans: var(--font-work-sans);
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
 }
 
 /* ---------------------------------------------------------------------------
@@ -59,7 +59,9 @@
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-work-sans), 'Work Sans', sans-serif;
+  font-family: 'Inter Variable', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
 }
@@ -77,6 +79,25 @@ body {
 .surface-subtle:hover {
   border-color: var(--line-strong);
   background: var(--surface-hover);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+a.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .border-subtle {

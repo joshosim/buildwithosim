@@ -1,57 +1,41 @@
 import Image from 'next/image'
 import Avatar from '../public/CEO.jpg'
+import heroShot from '../public/brilliance-integrated.png'
 import Chat from '@/components/Chat'
 import Reveal from '@/components/Reveal'
-import ProjectsTimeline from '@/components/ProjectsTimeline'
+import Work from '@/components/Work'
+import { data as projects } from '@/utils/project-data'
+
+const WHATSAPP_URL =
+  'https://wa.me/2347066530998?text=' + encodeURIComponent('Hello Osim, I would like to work with you.')
+const EMAIL = 'joshuauka0@gmail.com'
 
 const services = [
   {
-    title: "Web Development",
-    desc: "Modern, fast websites built with React & Next.js that help businesses attract and convert customers.",
-    tags: ["React & Next.js", "Node.js Backend", "E-commerce"],
+    title: 'Landing pages & business websites',
+    desc: 'Fast, mobile-first sites for small businesses and creators, built so every visit has a clear next step: call, book or message you on WhatsApp.',
   },
   {
-    title: "Mobile Apps",
-    desc: "Cross-platform mobile applications that deliver smooth, native-feeling user experiences.",
-    tags: ["React Native", "Android", "iOS"],
+    title: 'WhatsApp lead tracking & follow-up',
+    desc: 'See which enquiries came from where, who has replied and who needs a nudge. I built Recall, a customer follow-up CRM, on this idea.',
   },
   {
-    title: "Landing Pages",
-    desc: "High-converting landing pages designed for creators and businesses to turn visitors into customers.",
-    tags: ["Conversion Design", "Creator Economy", "Analytics"],
+    title: 'AI automations',
+    desc: 'Workflows in n8n and Make that classify feedback, answer routine messages and move data between your tools without manual work.',
   },
   {
-    title: "Digital Tools",
-    desc: "Custom software and internal tools that improve productivity and streamline workflows.",
-    tags: ["Internal Tools", "Productivity Apps", "Custom Software"],
-  },
-  {
-    title: "AI & Automations",
-    desc: "End-to-end workflow automation and AI integrations that eliminate repetitive tasks, connect your tools, and run 24/7 without you.",
-    tags: ["n8n", "Make.com", "Zapier", "OpenAI", "Webhooks"],
+    title: 'Mobile & web apps',
+    desc: 'Custom apps in React Native and Next.js. One of mine, Resume & CV Builder, is live on Google Play.',
   },
 ]
 
-const testimonials = [
-  {
-    quote: "Osim is a reliable Software Engineer who consistently delivers clean and responsive user interfaces. He works well with design teams and pays attention to detail. He's proactive, easy to work with, and always willing to improve!",
-    name: "Engr Uka Osim (Snr)",
-    role: "CEO, 4onStudiosLTD",
-    initials: "UO",
-  },
-  {
-    quote: "From start to finish, you handled everything with so much excellence and care. I am genuinely impressed with the result and the professionalism you showed. I'll definitely recommend you to anyone!",
-    name: "Oluwatobi Timothy",
-    role: "Professional Graphics Designer",
-    initials: "OT",
-  },
-  {
-    quote: "Osim's landing page design increased our conversion rate by 60%. He understood our brand perfectly and delivered beyond what we imagined.",
-    name: "Emily Rodriguez",
-    role: "Marketing Director, GrowthCo",
-    initials: "ER",
-  },
-]
+// Replace or extend with more real, named clients as they agree to be quoted.
+const testimonial = {
+  quote:
+    "From start to finish, you handled everything with so much excellence and care. I am genuinely impressed with the result and the professionalism you showed. I'll definitely recommend you to anyone!",
+  name: 'Oluwatobi Timothy',
+  role: 'Professional Graphics Designer',
+}
 
 export default function Home() {
   return (
@@ -59,160 +43,183 @@ export default function Home() {
       <Reveal />
 
       {/* ── Hero ── */}
-      <section className="min-h-screen flex items-center justify-center px-6 pt-24 pb-16">
-        <div className="max-w-5xl mx-auto w-full">
+      <section className="px-6 pt-20 md:pt-28 pb-20">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
           <div className="reveal">
-            <p className="text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-6">
-              Full Stack Developer & Digital Craftsman
-            </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-fg mb-8">
-              Building Digital<br />
-              Experiences<br />
-              <span className="text-muted font-light">That Matter.</span>
+            <p className="eyebrow mb-5">BuildWithOsim · Yenagoa, Nigeria</p>
+            <h1 className="text-4xl md:text-6xl font-semibold leading-[1.08] tracking-tight text-fg mb-6">
+              Websites that turn visitors into{' '}
+              <span className="text-accent">WhatsApp enquiries.</span>
             </h1>
-            <p className="text-muted text-lg max-w-xl mb-10 leading-relaxed font-light">
-              I craft high-performance websites, mobile apps, and digital tools that help businesses grow and creators shine.
+            <p className="text-muted text-lg md:text-xl max-w-xl mb-9">
+              I build fast websites and lead tracking for small businesses in Nigeria, plus the apps and
+              automations behind them.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <a href="#projects" className="btn-primary px-7 py-3 rounded-sm text-sm font-semibold tracking-wide">
-                View My Work
+            <div className="flex flex-wrap gap-3 mb-8">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary px-6 py-3.5 rounded-full text-base"
+              >
+                Message me on WhatsApp
               </a>
-              <a href="#contact" className="btn-outline px-7 py-3 rounded-sm text-sm font-semibold tracking-wide">
-                Start a Project
+              <a href="#projects" className="btn-outline px-6 py-3.5 rounded-full text-base font-medium">
+                See the work
               </a>
             </div>
+            <p className="text-muted text-sm">
+              {projects.length} projects built · 1 app on Google Play · Working remotely
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 border border-line reveal">
-            {[
-              { value: "20+", label: "Projects Delivered" },
-              { value: "10+", label: "Happy Clients" },
-              { value: "3+", label: "Years Experience" },
-              { value: "100%", label: "Satisfaction" },
-            ].map((stat) => (
-              <div key={stat.label} className="p-8 border-r border-line last:border-r-0 text-center">
-                <div className="text-3xl font-black text-fg">{stat.value}</div>
-                <p className="text-muted text-xs mt-1 uppercase tracking-wider font-medium">{stat.label}</p>
+          <div className="reveal">
+            <div className="rounded-2xl border border-line bg-surface p-2 shadow-[var(--shadow)]">
+              <div className="flex items-center gap-1.5 px-3 py-2" aria-hidden>
+                <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
+                <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
+                <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
               </div>
-            ))}
+              <Image
+                src={heroShot}
+                alt="Brilliance Integrated website"
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="w-full rounded-lg border border-line"
+              />
+            </div>
+            <p className="text-muted text-sm mt-3">Brilliance Integrated: business website, Lagos</p>
           </div>
         </div>
       </section>
 
       {/* ── Services ── */}
       <section id="services" className="py-24 px-6 border-t border-line">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-16 reveal">
-            <p className="text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-3">What I Do</p>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-fg">Services</h2>
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12 reveal max-w-2xl">
+            <p className="eyebrow mb-3">Services</p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-fg">
+              What I can build for your business
+            </h2>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px border border-line reveal">
-            {services.map((service, i) => (
-              <div key={i} className="p-10 border-b border-r border-line [&:nth-child(3n)]:border-r-0 last:border-b-0 md:last:col-span-full lg:last:col-span-1">
-                <div className="text-xs font-bold text-muted uppercase tracking-widest mb-4">0{i + 1}</div>
-                <h3 className="text-xl font-bold text-fg mb-3">{service.title}</h3>
-                <p className="text-muted text-sm leading-relaxed mb-6 font-light">{service.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] font-semibold uppercase tracking-widest text-muted border border-line px-2 py-1">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+          <div className="grid md:grid-cols-2 gap-6 reveal">
+            {services.map((service) => (
+              <div key={service.title} className="card p-8">
+                <h3 className="text-xl font-semibold tracking-tight text-fg mb-3">{service.title}</h3>
+                <p className="text-muted">{service.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Projects Timeline ── */}
+      {/* ── Work ── */}
       <section id="projects" className="py-24 px-6 border-t border-line">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-16 reveal">
-            <p className="text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-3">Selected Work</p>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-fg">Projects</h2>
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12 reveal max-w-2xl">
+            <p className="eyebrow mb-3">Selected work</p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-fg">
+              Things I have built and shipped
+            </h2>
           </div>
-          <ProjectsTimeline />
+          <Work />
         </div>
       </section>
 
       {/* ── About ── */}
       <section id="about" className="py-24 px-6 border-t border-line">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <div className="reveal">
-              <div className="border border-line overflow-hidden">
-                <Image
-                  src={Avatar}
-                  alt="Osim Uka"
-                  className="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                />
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[280px_1fr] gap-12 items-start">
+          <div className="reveal">
+            <Image
+              src={Avatar}
+              alt="Osim Uka"
+              sizes="280px"
+              className="w-full max-w-[280px] rounded-2xl border border-line object-cover aspect-[4/5]"
+            />
+          </div>
+          <div className="reveal max-w-2xl">
+            <p className="eyebrow mb-3">About</p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-fg mb-6">
+              I&apos;m Osim, a self-taught developer with an engineering degree
+            </h2>
+            <p className="text-muted mb-5">
+              I studied mechanical engineering at the Federal University of Technology, Owerri, and taught
+              myself to build software. I still work like an engineer: find the real cause of the problem,
+              build the simplest thing that fixes it, then test that it holds up.
+            </p>
+            <p className="text-muted mb-8">
+              I&apos;m based in Yenagoa, Bayelsa State, and work with small businesses and creators who need a
+              website, an app or an automation that does one specific job well.
+            </p>
+            <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm border-t border-line pt-6">
+              <div>
+                <dt className="text-muted">Based in</dt>
+                <dd className="text-fg font-medium">Yenagoa, Nigeria (remote)</dd>
               </div>
-            </div>
-
-            <div className="reveal">
-              <p className="text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-3">About Me</p>
-              <h2 className="text-4xl md:text-5xl font-black tracking-tight text-fg mb-8">Behind the Code</h2>
-              <p className="text-muted text-base mb-5 leading-relaxed font-light">
-                I'm Osim Uka, a full-stack developer with a passion for creating digital experiences that make a real difference. With 3+ years of experience, I've helped businesses transform their ideas into reality.
-              </p>
-              <p className="text-muted text-base mb-10 leading-relaxed font-light">
-                My approach combines technical expertise with creative problem-solving. I don't just write code — I craft solutions that drive results, whether that's increasing conversions, streamlining operations, or creating delightful user experiences.
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 mb-10">
-                {["Problem Solver", "Detail Oriented", "Fast Learner", "Team Player"].map((trait) => (
-                  <div key={trait} className="flex items-center gap-3">
-                    <div className="w-1 h-1 rounded-full bg-fg flex-shrink-0" />
-                    <span className="text-xs font-semibold uppercase tracking-widest text-muted">{trait}</span>
-                  </div>
-                ))}
+              <div>
+                <dt className="text-muted">Education</dt>
+                <dd className="text-fg font-medium">B.Eng. Mechanical Engineering, FUTO</dd>
               </div>
-
-              <a href="#contact" className="btn-primary px-7 py-3 rounded-sm text-sm font-semibold tracking-wide inline-block">
-                Let's Work Together
-              </a>
-            </div>
+              <div>
+                <dt className="text-muted">Stack</dt>
+                <dd className="text-fg font-medium">Next.js, React Native, Node.js, Supabase</dd>
+              </div>
+              <div>
+                <dt className="text-muted">Automation</dt>
+                <dd className="text-fg font-medium">n8n, Make.com, OpenAI</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
+      {/* ── Testimonial ── */}
       <section id="testimonials" className="py-24 px-6 border-t border-line">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-16 reveal">
-            <p className="text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-3">Social Proof</p>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-fg">Client Stories</h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-px border border-line reveal">
-            {testimonials.map((t, i) => (
-              <div key={i} className="p-8 border-r border-line last:border-r-0">
-                <p className="text-muted text-sm leading-relaxed mb-8 font-light">"{t.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 border border-line flex items-center justify-center text-xs font-bold text-fg flex-shrink-0">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-fg">{t.name}</p>
-                    <p className="text-[10px] text-muted uppercase tracking-widest font-medium">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="max-w-3xl mx-auto reveal">
+          <p className="eyebrow mb-6">What clients say</p>
+          <blockquote className="text-2xl md:text-3xl font-medium leading-snug tracking-tight text-fg">
+            &ldquo;{testimonial.quote}&rdquo;
+          </blockquote>
+          <p className="text-muted mt-6">
+            <span className="text-fg font-medium">{testimonial.name}</span>, {testimonial.role}
+          </p>
         </div>
       </section>
 
-      {/* ── Contact / Chat ── */}
+      {/* ── Contact ── */}
       <section id="contact" className="py-24 px-6 border-t border-line">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-16 reveal">
-            <p className="text-muted text-xs font-semibold uppercase tracking-[0.2em] mb-3">Get In Touch</p>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-fg">Let's Talk</h2>
+        <div className="max-w-3xl mx-auto reveal">
+          <p className="eyebrow mb-3">Contact</p>
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-fg mb-5">
+            Tell me what you need.
+          </h2>
+          <p className="text-muted text-lg mb-8">
+            The fastest way to reach me is WhatsApp. Send a few lines about your business and what you want
+            to build, and I&apos;ll reply with what&apos;s realistic.
+          </p>
+          <div className="flex flex-wrap gap-3 mb-12">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary px-6 py-3.5 rounded-full text-base"
+            >
+              Message me on WhatsApp
+            </a>
+            <a href={`mailto:${EMAIL}`} className="btn-outline px-6 py-3.5 rounded-full text-base font-medium">
+              {EMAIL}
+            </a>
           </div>
-          <Chat />
+
+          <details className="card group">
+            <summary className="cursor-pointer list-none px-6 py-4 font-medium text-fg flex items-center justify-between">
+              Or ask my assistant a quick question
+              <span className="text-muted transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+            </summary>
+            <div className="px-4 pb-4">
+              <Chat />
+            </div>
+          </details>
         </div>
       </section>
     </div>
