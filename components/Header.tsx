@@ -2,17 +2,16 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, Moon, Sun, X } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
 
 const NAV_LINKS = [
+  { href: '#projects', label: 'Work' },
   { href: '#services', label: 'Services' },
-  { href: '#projects', label: 'Projects' },
-  { href: '/music', label: 'Music' },
   { href: '#about', label: 'About' },
-  { href: '#testimonials', label: 'Testimonials' },
+  { href: '/music', label: 'Music' },
+  { href: '#contact', label: 'Contact' },
 ]
 
 export default function Header() {
@@ -22,7 +21,6 @@ export default function Header() {
   const sectionHref = (href: string) =>
     href.startsWith('#') && pathname !== '/' ? `/${href}` : href
 
-  const logoSrc = theme === 'dark' ? '/BUILDWITHOSIM_LOGO_DARK.svg' : '/BUILDWITHOSIM_LOGO_LIGHT.svg'
 
   const sendMessage = () => {
     const phoneNumber = '+2347066530998'
@@ -31,8 +29,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md px-6">
+      <div className="max-w-6xl mx-auto h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             className="text-muted hover:text-fg md:hidden"
@@ -42,15 +40,8 @@ export default function Header() {
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          <Link href="/">
-            <Image
-              src={logoSrc}
-              alt="BuildWithOsim"
-              width={140}
-              height={36}
-              className="h-9 w-auto object-contain"
-              priority
-            />
+          <Link href="/" className="text-lg font-semibold tracking-tight text-fg">
+            BuildWithOsim
           </Link>
         </div>
 
@@ -64,7 +55,7 @@ export default function Header() {
                 key={link.href}
                 href={href}
                 aria-current={isMusicPage ? 'page' : undefined}
-                className={`text-xs font-semibold uppercase tracking-widest transition-colors ${
+                className={`text-sm font-medium transition-colors ${
                   isMusicPage ? 'text-fg' : 'text-muted hover:text-fg'
                 }`}
               >
@@ -77,14 +68,14 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <button
             onClick={toggleTheme}
-            className="border border-line p-2 text-muted hover:text-fg hover:border-line-strong transition-colors"
+            className="border border-line rounded-full p-2 text-muted hover:text-fg hover:border-line-strong transition-colors"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
           </button>
           <button
             onClick={sendMessage}
-            className="btn-primary hidden md:block px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-sm"
+            className="btn-primary hidden md:block px-5 py-2 text-sm rounded-full"
           >
             Let&apos;s Talk
           </button>
@@ -94,7 +85,7 @@ export default function Header() {
       {/* Mobile menu */}
       {isOpen && (
         <div className="border-t border-line bg-bg md:hidden">
-          <nav className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-1">
+          <nav className="max-w-6xl mx-auto py-4 flex flex-col gap-1">
             {NAV_LINKS.map((link) => {
               const href = sectionHref(link.href)
               const isMusicPage = link.href === '/music' && pathname === '/music'
@@ -104,7 +95,7 @@ export default function Header() {
                   key={link.href}
                   href={href}
                   aria-current={isMusicPage ? 'page' : undefined}
-                  className={`py-3 text-xs font-semibold uppercase tracking-widest transition-colors border-b border-line last:border-b-0 ${
+                  className={`py-3 text-base font-medium transition-colors border-b border-line last:border-b-0 ${
                     isMusicPage ? 'text-fg' : 'text-muted hover:text-fg'
                   }`}
                   onClick={() => setIsOpen(false)}
@@ -115,7 +106,7 @@ export default function Header() {
             })}
             <button
               onClick={() => { setIsOpen(false); sendMessage() }}
-              className="btn-primary mt-4 py-3 text-xs font-bold uppercase tracking-widest rounded-sm"
+              className="btn-primary mt-4 py-3 text-base rounded-full"
             >
               Let&apos;s Talk
             </button>

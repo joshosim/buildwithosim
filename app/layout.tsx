@@ -1,21 +1,15 @@
 import type { Metadata } from 'next'
-import { Work_Sans } from 'next/font/google'
+import '@fontsource-variable/inter'
 import './globals.css'
 import Providers from '@/components/Providers'
 import SiteChrome from '@/components/SiteChrome'
 import ScrollToTop from '@/components/ScrollToTop'
 import { Analytics } from "@vercel/analytics/next"
 
-const workSans = Work_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-work-sans',
-})
-
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://buildwithosim.com'),
   title: {
-    default: 'BuildWithOsim — Software Developer & Digital Creator',
+    default: 'BuildWithOsim — Websites and WhatsApp lead tracking for Nigerian businesses',
     template: '%s | BuildWithOsim',
   },
   description:
@@ -43,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${workSans.className} ${workSans.variable}`}>
+      <body>
         <Providers>
           <ScrollToTop />
           <SiteChrome>{children}</SiteChrome>
