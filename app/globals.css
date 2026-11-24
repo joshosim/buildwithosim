@@ -222,3 +222,38 @@ a.card:hover {
   }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------------------- */
+
+.hero-dots {
+  background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 0%, transparent 75%);
+  opacity: 0.5;
+}
+
+.hero-glow {
+  background: radial-gradient(closest-side, var(--accent-soft), transparent);
+  filter: blur(20px);
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.fade-up { animation: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.d1 { animation-delay: 0.05s; }
+.d2 { animation-delay: 0.15s; }
+.d3 { animation-delay: 0.25s; }
+.d4 { animation-delay: 0.4s; }
+
+@keyframes float-a { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@keyframes float-b { 0%, 100% { translate: 0 0; } 50% { translate: 0 7px; } }
+.float-a { animation: float-a 7s ease-in-out infinite; }
+.float-b { animation: float-b 9s ease-in-out infinite; }
+
+.frame-shadow { box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--line); }

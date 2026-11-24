@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import Avatar from '../public/CEO.jpg'
 import heroShot from '../public/brilliance-integrated.png'
+import kiloShot from '../public/kilobyted.png'
+import styleShot from '../public/her-way-to-style.png'
+import type { StaticImageData } from 'next/image'
+import { ArrowRight, MessageCircle } from 'lucide-react'
 import Chat from '@/components/Chat'
 import Reveal from '@/components/Reveal'
 import Work from '@/components/Work'
@@ -37,59 +41,118 @@ const testimonial = {
   role: 'Professional Graphics Designer',
 }
 
+function ShotFrame({
+  src,
+  alt,
+  label,
+  priority,
+  pos = 'top',
+  className = '',
+}: {
+  src: StaticImageData
+  alt: string
+  label?: string
+  priority?: boolean
+  pos?: string
+  className?: string
+}) {
+  return (
+    <div className={className}>
+      <div className="frame-shadow rounded-2xl bg-surface p-1.5">
+        <div className="flex items-center gap-1.5 px-2.5 py-2" aria-hidden>
+          <span className="w-2 h-2 rounded-full bg-line-strong" />
+          <span className="w-2 h-2 rounded-full bg-line-strong" />
+          <span className="w-2 h-2 rounded-full bg-line-strong" />
+        </div>
+        <Image
+          src={src}
+          alt={alt}
+          priority={priority}
+          sizes="(min-width: 1024px) 40vw, 90vw"
+          style={{ objectPosition: pos }}
+          className="w-full rounded-lg border border-line aspect-[16/10] object-cover"
+        />
+      </div>
+      {label && (
+        <span className="absolute -bottom-3 left-5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-fg shadow-sm">
+          {label}
+        </span>
+      )}
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <div>
       <Reveal />
 
       {/* ── Hero ── */}
-      <section className="px-6 pt-20 md:pt-28 pb-20">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
-          <div className="reveal">
-            <p className="eyebrow mb-5">BuildWithOsim · Yenagoa, Nigeria</p>
-            <h1 className="text-4xl md:text-6xl font-semibold leading-[1.08] tracking-tight text-fg mb-6">
-              Websites that turn visitors into{' '}
-              <span className="text-accent">WhatsApp enquiries.</span>
+      <section className="relative overflow-hidden px-6 pt-14 md:pt-24 pb-16 md:pb-24">
+        <div className="hero-dots absolute inset-0" aria-hidden />
+        <div className="hero-glow absolute -right-24 top-10 w-[640px] h-[640px] rounded-full" aria-hidden />
+
+        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[1.08fr_1fr] gap-16 lg:gap-12 items-center">
+          <div>
+            <p className="fade-up d1 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm text-muted mb-7">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden />
+              Yenagoa, Nigeria · Working remotely
+            </p>
+            <h1 className="fade-up d2 text-[2.6rem] sm:text-6xl lg:text-[4.6rem] font-semibold leading-[1.02] tracking-[-0.035em] text-fg mb-7">
+              Websites that turn visitors into <span className="text-accent">WhatsApp enquiries.</span>
             </h1>
-            <p className="text-muted text-lg md:text-xl max-w-xl mb-9">
+            <p className="fade-up d3 text-muted text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
               I build fast websites and lead tracking for small businesses in Nigeria, plus the apps and
               automations behind them.
             </p>
-            <div className="flex flex-wrap gap-3 mb-8">
+            <div className="fade-up d4 flex flex-wrap items-center gap-3">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary px-6 py-3.5 rounded-full text-base"
+                className="btn-primary inline-flex items-center gap-2.5 pl-5 pr-6 py-4 rounded-full text-base shadow-[0_10px_30px_-10px_var(--accent)]"
               >
+                <MessageCircle size={20} aria-hidden />
                 Message me on WhatsApp
               </a>
-              <a href="#projects" className="btn-outline px-6 py-3.5 rounded-full text-base font-medium">
+              <a
+                href="#projects"
+                className="btn-outline inline-flex items-center gap-2 px-6 py-4 rounded-full text-base font-medium"
+              >
                 See the work
+                <ArrowRight size={18} aria-hidden />
               </a>
             </div>
-            <p className="text-muted text-sm">
-              {projects.length} projects built · 1 app on Google Play · Working remotely
-            </p>
           </div>
 
-          <div className="reveal">
-            <div className="rounded-2xl border border-line bg-surface p-2 shadow-[var(--shadow)]">
-              <div className="flex items-center gap-1.5 px-3 py-2" aria-hidden>
-                <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
-                <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
-                <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
-              </div>
-              <Image
-                src={heroShot}
-                alt="Brilliance Integrated website"
-                priority
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="w-full rounded-lg border border-line"
-              />
-            </div>
-            <p className="text-muted text-sm mt-3">Brilliance Integrated: business website, Lagos</p>
+          {/* Layered project screenshots */}
+          <div className="fade-up d3 relative mx-auto w-full max-w-[580px] sm:aspect-[1/1]">
+            <ShotFrame
+              src={kiloShot}
+              alt="Kilobyte Studios website"
+              pos="center 78%"
+              className="hidden sm:block absolute -right-[3%] top-0 w-[58%] z-10 rotate-[3deg] float-b"
+            />
+            <ShotFrame
+              src={styleShot}
+              alt="Her Way to Style website"
+              className="hidden sm:block absolute right-0 bottom-[1%] w-[54%] z-20 -rotate-[2deg] float-b"
+            />
+            <ShotFrame
+              src={heroShot}
+              alt="Brilliance Integrated website"
+              label="Brilliance Integrated"
+              priority
+              className="relative sm:absolute left-0 sm:top-[19%] w-full sm:w-[72%] z-30 float-a"
+            />
           </div>
+        </div>
+
+        <div className="relative max-w-6xl mx-auto mt-16 md:mt-24 pt-7 border-t border-line fade-up d4 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted">
+          <span className="text-fg font-medium">Built with</span>
+          {['Next.js', 'React Native', 'Node.js', 'Supabase', 'n8n', 'OpenAI'].map((t) => (
+            <span key={t}>{t}</span>
+          ))}
         </div>
       </section>
 
